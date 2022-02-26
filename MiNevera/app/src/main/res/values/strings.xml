@@ -1,6 +1,10 @@
+<!DOCTYPE resources [
+]>
 <resources>
     <string name="app_name">MiNevera</string>
-    <string name="button1">boton1</string>
-    <string name="button2">boton2</string>
-    <string name="button3">boton3</string>
+    <string name="hello" > Hola!</string>
+    <string name="text_settings">Ajustes:</string>
+    <string name="settingsB">Ajustes</string>
+    <string name="mapB">Mapa</string>
+    <string name="text_map">MAPA</string>
 </resources>

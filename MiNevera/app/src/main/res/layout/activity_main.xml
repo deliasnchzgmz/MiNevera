@@ -9,28 +9,35 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        ​
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            ​
-            <Button android:id="@+id/button1"
-                android:layout_width="wrap_content"
+        tools:ignore="ExtraText"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/button1"/>
-            ​
-            <Button android:id="@+id/button2"
-                android:layout_width="wrap_content"
+                android:id="@+id/settingsButton"
+                android:onClick="goSettings"
+                android:text="@string/settingsB"
+                android:layout_margin="50px"
+                tools:ignore="MissingConstraints" />
+            <Button
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/button2" />
-            ​
-            <Button android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button3"/>
-        </LinearLayout>
+                android:id="@+id/mapButton"
+                android:onClick="goMap"
+                android:text="@string/mapB"
+                android:layout_margin="50px"
+                tools:ignore="MissingConstraints" />
+
+        </TableLayout>
+
+
+
     </LinearLayout>
+
 
   </androidx.constraintlayout.widget.ConstraintLayout>
