@@ -19,14 +19,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/settingsButton"
-                android:onClick="goSettings"
-                android:text="@string/settingsB"
-                android:layout_margin="50px"
-                tools:ignore="MissingConstraints" />
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/mapButton"
                 android:onClick="goMap"
                 android:text="@string/mapB"
