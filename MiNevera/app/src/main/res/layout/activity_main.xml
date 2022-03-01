@@ -6,31 +6,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         ​
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        <TextView
+            android:id="@+id/mensaje_mainact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            ​
-            <Button android:id="@+id/button1"
+            android:text="@string/mensaje_mainact"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/button1"/>
+                android:contentDescription="@string/im1"
+                android:src="@mipmap/im1"/>
+
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/sage_green"
+            android:layout_alignParentBottom="true">
+
             ​
-            <Button android:id="@+id/button2"
+
+            <Button
+                android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/button2"
+                android:drawableLeft="@mipmap/add"
+                android:text="@string/button1" />
+            ​
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:drawableLeft="@mipmap/add"
                 android:text="@string/button2" />
             ​
-            <Button android:id="@+id/button3"
+
+            <Button
+                android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/button3"/>
-        </LinearLayout>
+                android:layout_alignRight="@id/button3"
+                android:layout_alignParentEnd="false"
+                android:layout_toRightOf="@id/button2"
+                android:drawableLeft="@mipmap/add"
+                android:text="@string/button3" />
+        </RelativeLayout>
     </LinearLayout>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
