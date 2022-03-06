@@ -4,6 +4,9 @@
     <string name="hello"> Hola!</string>
     <string name="mapB">Mapa</string>
     <string name="text_map">MAPA</string>
+<<<<<<< Updated upstream
+=======
+    
     <string name="title_activity_list">activity_list</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
