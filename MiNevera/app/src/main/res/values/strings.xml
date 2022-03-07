@@ -1,12 +1,10 @@
 <resources>
     <string name="app_name">MiNevera</string>
-    <string name="button1">B1</string>
-    <string name="button2">B2</string>
-    <string name="button3">B3</string>
 
     # main activity
+    <string name="b_lista_desc">Añadir a la lista de la compra</string>
+    <string name="b_mas_desc">Añadir productos a la nevera</string>
+    <string name="b_mapa_desc">Abrir el mapa </string>
     <string name="mensaje_mainact">En tu nevera actualmente hay ...</string>
-    <string name="im1">Zanahorias</string>
-    <string name="im2">Tomate frito</string>
-    <string name="im3">Queso</string>
+
 </resources>
