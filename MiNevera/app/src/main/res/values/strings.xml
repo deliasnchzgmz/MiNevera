@@ -1,20 +1,10 @@
-<!DOCTYPE resources []>
 <resources>
     <string name="app_name">MiNevera</string>
-    <string name="hello"> Hola!</string>
-    <string name="mapB">Mapa</string>
-    <string name="text_map">MAPA</string>
-<<<<<<< Updated upstream
-=======
-    
-    <string name="title_activity_list">activity_list</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
->>>>>>> Stashed changes
 
-    <string name="action_settings">Settings</string>
-    <string name="action_about">About</string>
+    # main activity
+    <string name="b_lista_desc">Añadir a la lista de la compra</string>
+    <string name="b_mas_desc">Añadir productos a la nevera</string>
+    <string name="b_mapa_desc">Abrir el mapa </string>
+    <string name="mensaje_mainact">En tu nevera actualmente hay ...</string>
+
 </resources>
