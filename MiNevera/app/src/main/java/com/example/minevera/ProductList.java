@@ -1,4 +1,6 @@
 package com.example.minevera;
 
-public class ProductList {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ProductList extends AppCompatActivity {
 }
