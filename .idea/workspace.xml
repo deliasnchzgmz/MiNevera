@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4a0c1609-2286-4e96-93a9-5845fc56ff09" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MiNevera/app/src/main/java/com/example/minevera/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/MiNevera/app/src/main/java/com/example/minevera/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MiNevera/app/src/main/res/layout/activity_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MiNevera/app/src/main/res/layout/activity_settings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
