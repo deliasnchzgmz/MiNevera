@@ -111,14 +111,13 @@ public class dbProducts {
      * successfully created return the new rowId for that note, otherwise return
      * a -1 to indicate failure.
      *
-     * @param title the title of the note
-     * @param body the body of the note
+     * @param name the title of the note
+
      * @return rowId or -1 if failed
      */
-    public long createNote(String title, String body) {
+    public long createNote(String name) {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_TITLE, title);
-        initialValues.put(KEY_BODY, body);
+        initialValues.put(KEY_TITLE, name);
 
         return mDb.insert(DATABASE_TABLE, null, initialValues);
     }
@@ -172,16 +171,14 @@ public class dbProducts {
      * values passed in
      *
      * @param rowId id of note to update
-     * @param title value to set note title to
-     * @param body value to set note body to
+     * @param name value to set note title to
      * @return true if the note was successfully updated, false otherwise
      */
-    public boolean updateNote(long rowId, String title, String body) {
+    /*public boolean updateNote(long rowId, String name) {
         ContentValues args = new ContentValues();
-        args.put(KEY_TITLE, title);
-        args.put(KEY_BODY, body);
+        args.put(KEY_TITLE, name);
 
         return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
-    }
+    }*/
 }
 

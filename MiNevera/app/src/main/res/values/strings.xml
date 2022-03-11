@@ -12,6 +12,13 @@
     <string name="b_mapa_desc">Abrir el mapa </string>
     <string name="mensaje_mainact">En tu nevera actualmente hay ...</string>
 
+    # add activity
+    <string name="no_content">Aún no has añadido nada</string>
+    <string name="menu_insert">Añadir producto</string>
+    <string name="menu_delete">Borrar producto</string>
+    <string name="name">Nombre</string>
+    <string name="save">Guardar</string>
+    <string name="edit_product">Editar producto</string>
 
 
 </resources>
