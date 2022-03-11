@@ -6,31 +6,174 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        ​
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mainact">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="629dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mensaje_mainact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/mensaje_mainact"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp">
+
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stretchColumns="1">
+
+                    <TableRow
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/dark_grey">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/light_grey">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp" />
+
+                    </TableRow>
+                    <TableRow
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/dark_grey">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/light_grey">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp" />
+
+                    </TableRow>
+                    <TableRow
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/dark_grey">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/light_grey">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp" />
+
+                    </TableRow>
+                    <TableRow
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/dark_grey">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/light_grey">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp" />
+
+                    </TableRow>
+
+                </TableLayout>
+
+
+            </ScrollView>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            ​
-            <Button android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button1"/>
-            ​
-            <Button android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button2" />
-            ​
-            <Button android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/button3"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:background="@color/sage_green">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/boton_lista"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@id/boton_mas"
+                android:adjustViewBounds="true"
+                android:background="@color/sage_green"
+                android:contentDescription="@string/b_lista_desc"
+                android:onClick="ListaCompra"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/b_lista" />
+
+            <ImageButton
+                android:id="@+id/boton_mas"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:background="@color/sage_green"
+                android:contentDescription="@string/b_mas_desc"
+                android:onClick="AñadirNevera"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/b_mas" />
+
+            <ImageButton
+                android:id="@+id/boton_mapa"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignRight="@id/boton_mapa"
+                android:layout_alignParentEnd="false"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@id/boton_mas"
+                android:adjustViewBounds="true"
+                android:background="@color/sage_green"
+                android:contentDescription="@string/b_mapa_desc"
+                android:onClick="AbrirMapa"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/b_mapa" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
