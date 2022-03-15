@@ -12,6 +12,8 @@
     <string name="b_mapa_desc">Abrir el mapa </string>
     <string name="mensaje_mainact">En tu nevera actualmente hay ...</string>
 
+    <string name="api_key_edamam">ec4ce480d955917aee29290b5a94fcd7\t</string>
+    <string name="api_id_edamam">3d504fc1</string>
 
 
 </resources>
