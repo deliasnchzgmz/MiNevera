@@ -19,19 +19,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+    
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         if (id == R.id.action_settings) {
             System.out.println("APPMOV: About settings...");
 
             Intent intent = new Intent(this, Settings.class);
+
             startActivity(intent);
             return true;
         }
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
           startActivity(listIntent);
 
     }
+
     //Botón de añadir productos a la nevera
     public void AñadirNevera(android.view.View view) {
         Snackbar.make(findViewById(R.id.mainact), R.string.b_mas_desc,
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Intent addIntent = new Intent(this, AddProducts.class);
         startActivity(addIntent);
     }
+
     //Botón de abrir el mapa
     public void AbrirMapa(android.view.View view) {
         Snackbar.make(findViewById(R.id.mainact), R.string.b_mapa_desc,
