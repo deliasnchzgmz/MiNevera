@@ -68,7 +68,6 @@ public class AddProducts extends AppCompatActivity {
                     note.getColumnIndexOrThrow(dbProducts.KEY_TITLE)));
 
         }
-
     }
     /*@Override
     public boolean onOptionsItemSelected(Button b) {

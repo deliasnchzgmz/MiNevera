@@ -72,33 +72,6 @@ public class ProductList extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         fillData();
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            System.out.println("APPMOV: About settings...");
-
-            Intent intent = new Intent(this, Settings.class);
-            startActivity(intent);
-            return true;
-        }
-        if (id == R.id.action_about) {
-            System.out.println("APPMOV: About action...");
-
-            Intent intent = new Intent(this, AboutUs.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
 }
