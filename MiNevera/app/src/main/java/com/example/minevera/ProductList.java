@@ -23,7 +23,7 @@ public class ProductList extends AppCompatActivity {
     private ListView p_listview;
 
     // para indicar en un Intent si se quiere crear una nueva nota o editar una existente
-    private static final int ACTIVITY_CREATE=0;
+    private static final int ACTIVITY_CREATE = 0;
     //private static final int ACTIVITY_EDIT=1;
 
     @Override
@@ -66,12 +66,6 @@ public class ProductList extends AppCompatActivity {
     private void createNote() {
         Intent i = new Intent(this, AddProducts.class);
         startActivityForResult(i, ACTIVITY_CREATE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-        fillData();
     }
 
 }
