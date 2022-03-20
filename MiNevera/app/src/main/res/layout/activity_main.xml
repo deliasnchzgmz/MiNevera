@@ -129,8 +129,8 @@
 
             <ImageButton
                 android:id="@+id/boton_lista"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginRight="15dp"
                 android:layout_toLeftOf="@id/boton_mas"
                 android:adjustViewBounds="true"
@@ -142,8 +142,8 @@
 
             <ImageButton
                 android:id="@+id/boton_mas"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
                 android:background="@color/sage_green"
@@ -154,8 +154,8 @@
 
             <ImageButton
                 android:id="@+id/boton_mapa"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_alignRight="@id/boton_mapa"
                 android:layout_alignParentEnd="false"
                 android:layout_marginLeft="15dp"
