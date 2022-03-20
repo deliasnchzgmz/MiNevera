@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public void AñadirNevera(android.view.View view) {
         Snackbar.make(findViewById(R.id.mainact), R.string.b_mas_desc,
                 Snackbar.LENGTH_SHORT).show();
-        Intent addIntent = new Intent(this, AddMenu.class);
+        Intent addIntent = new Intent(this, AddProducts.class);
         startActivity(addIntent);
     }
 
