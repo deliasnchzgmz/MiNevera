@@ -21,11 +21,16 @@
             android:layout_marginRight="10dp"
             android:text="@string/mensaje_mainact"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
         <ListView
             android:id="@+id/id_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
             android:layout_below="@+id/mensaje_mainact"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_gravity="center_horizontal"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
