@@ -41,13 +41,14 @@ public class dbProducts {
 
     //campos de la tabla de la base de datos
     public static final String KEY_TITLE = "name";
-    public static final String KEY_DATE = "date"; //guardado como string ("YYYY-MM-DD HH:MM:SS.SSS")
+    public static final String KEY_DATE = "days"; //guardado como string ("YYYY-MM-DD HH:MM:SS.SSS")
     public static final String KEY_ROWID = "_id";
 
     // Sentencia SQL para crear las tablas de las bases de datos
     private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE + " (" +
             KEY_ROWID +" integer primary key autoincrement, " +
-            KEY_TITLE +" text not null);";
+            KEY_TITLE +" text not null, " +
+            KEY_DATE  +" text not null);";
 
     /*
     private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE + " (" +
@@ -55,7 +56,7 @@ public class dbProducts {
             KEY_TITLE +" text not null, " +
             KEY_DATE + " text not null);"; */
 
-    private DatabaseHelper mDbHelper;gi
+    private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
 
     private final Context mCtx;
@@ -120,9 +121,10 @@ public class dbProducts {
 
      * @return rowId or -1 if failed
      */
-    public long createNote(String name) {
+    public long createNote(String name, String days) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_TITLE, name);
+        initialValues.put(KEY_DATE, days);
 
         return mDb.insert(DATABASE_TABLE, null, initialValues);
     }
@@ -145,7 +147,7 @@ public class dbProducts {
      */
     public Cursor fetchAllNotes() {
 
-        return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_TITLE}, null, null, null, null, null);
+        return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_TITLE,KEY_DATE}, null, null, null, null, null);
     }
 
     /**
@@ -160,7 +162,7 @@ public class dbProducts {
         Cursor mCursor =
 
                 mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,
-                                KEY_TITLE}, KEY_ROWID + "=" + rowId, null,
+                                KEY_TITLE,KEY_DATE}, KEY_ROWID + "=" + rowId, null,
                         null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();

@@ -96,8 +96,9 @@ public class AddProducts extends AppCompatActivity {
 
     public void saveProduct(View view) {
         String name = productName.getText().toString();
+        String days = productDays.getText().toString();
         if (mRowId == null) {
-            long id = dbAdapter.createNote(name);
+            long id = dbAdapter.createNote(name, days);
             if (id > 0) {
                 mRowId = id;
             }

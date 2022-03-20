@@ -50,10 +50,10 @@ public class ProductList extends AppCompatActivity {
         Cursor notesCursor = dbAdapter.fetchAllNotes();
 
         // Creamos un array con los campos que queremos mostrar en el listview (sólo el título de la nota)
-        String[] from = new String[]{dbProducts.KEY_TITLE};
+        String[] from = new String[]{dbProducts.KEY_TITLE,dbProducts.KEY_DATE};
 
         // array con los campos que queremos ligar a los campos del array de la línea anterior (en este caso sólo text1)
-        int[] to = new int[]{R.id.text1};
+        int[] to = new int[]{R.id.text1, R.id.text2};
 
         // Creamos un SimpleCursorAdapter y lo asignamos al listview para mostrarlo
         SimpleCursorAdapter notes =
