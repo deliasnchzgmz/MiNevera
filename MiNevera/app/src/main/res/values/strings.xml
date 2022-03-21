@@ -12,9 +12,6 @@
     <string name="b_mapa_desc">Abrir el mapa </string>
     <string name="mensaje_mainact">En tu nevera actualmente hay ...</string>
 
-    #add menu
-    <string name="b_bbdd_desc">Añadir productos a la nevera manualmente</string>
-    <string name="b_camara_desc">Abrir la cámara </string>
     # add activity
     <string name="no_content">Aún no has añadido nada</string>
     <string name="menu_insert">Añadir producto</string>
