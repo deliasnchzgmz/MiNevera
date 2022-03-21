@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
     //Botón de abrir el mapa
     public void AbrirMapa(android.view.View view) {
-        Snackbar.make(findViewById(R.id.mainact), R.string.b_mapa_desc,
-                Snackbar.LENGTH_SHORT).show();
-        Intent mapIntent = new Intent(this, Map.class);
+        //Snackbar.make(findViewById(R.id.mainact), R.string.b_mapa_desc,
+        //Snackbar.LENGTH_SHORT).show();
+        Intent mapIntent = new Intent(this, Recipe.class);
         startActivity(mapIntent);
     }
 
