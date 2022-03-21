@@ -19,9 +19,6 @@ import android.widget.SimpleCursorAdapter;
 
 public class ProductList extends AppCompatActivity {
 
-    // para indicar en un Intent si se quiere crear una nueva nota o editar una existente
-    private static final int ACTIVITY_CREATE=0;
-    //private static final int ACTIVITY_EDIT=1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
