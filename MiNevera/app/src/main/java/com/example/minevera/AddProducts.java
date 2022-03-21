@@ -31,14 +31,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class AddProducts extends AppCompatActivity {
 
     private EditText productName;
-    private EditText productDays;
-
     private Long mRowId;
     private dbProducts dbAdapter;
 
@@ -51,7 +47,6 @@ public class AddProducts extends AppCompatActivity {
 
         // obtiene referencia a los tres views que componen el layout
         productName = (EditText) findViewById(R.id.name);
-        productDays = (EditText) findViewById(R.id.days);
         Button confirmButton = (Button) findViewById(R.id.save);
 
         //creamos el adaptador de la BD y la abrimos
@@ -96,9 +91,8 @@ public class AddProducts extends AppCompatActivity {
 
     public void saveProduct(View view) {
         String name = productName.getText().toString();
-        String days = productDays.getText().toString();
         if (mRowId == null) {
-            long id = dbAdapter.createNote(name, days);
+            long id = dbAdapter.createNote(name);
             if (id > 0) {
                 mRowId = id;
             }
