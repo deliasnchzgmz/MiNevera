@@ -23,5 +23,8 @@
     <string name="save">Guardar</string>
     <string name="edit_product">Editar producto</string>
 
+    #add menu
+    <string name="b_bbdd_desc">Añadir productos a la nevera manualmente</string>
+    <string name="b_camara_desc">Abrir la cámara </string>
 
 </resources>
