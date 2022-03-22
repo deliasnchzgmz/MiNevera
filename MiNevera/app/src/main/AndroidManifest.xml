@@ -35,7 +35,18 @@
         <activity
             android:name=".AddProducts"
             android:exported="true"
-            android:parentActivityName=".ProductList" />
+            android:parentActivityName="com.example.minevera.ProductList"></activity>
+
+        <activity android:name=".ProductList"
+            android:exported="true"></activity>
+
+        <activity android:name=".AddMenu"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Translucent"></activity>
+
+        <activity android:name=".Camara"
+            android:exported="true"></activity>
+
     </application>
 
 </manifest>
