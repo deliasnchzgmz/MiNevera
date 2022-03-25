@@ -6,21 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".Recipe">
 
-    <RelativeLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <ListView android:id="@+id/id_list_view"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
-    </RelativeLayout>
+        <ListView android:id="@+id/id_list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
