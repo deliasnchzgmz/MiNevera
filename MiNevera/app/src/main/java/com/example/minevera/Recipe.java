@@ -26,6 +26,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -65,13 +66,10 @@ class EdamamRecipe {
     }
 
     public String getIngredientLines() {
-        String aux;
-        if (ingredientLines.size()==0){
-            aux = TextUtils.join("\"", ingredientLines);
-        } else {
-            aux = TextUtils.join("\",\"", ingredientLines);
+        String aux = "";
+        for (int i=0; i<ingredientLines.size();i++) {
+            aux += "\n  -  "+ingredientLines.get(i) +"\n";
         }
-
         return aux;
     }
 
@@ -134,7 +132,7 @@ public class Recipe extends AppCompatActivity {
             for (int i = 0; i < result.size(); i++) {
                 // make a list of the venus that are loaded in the list.
                 // show the name, the category and the city
-                listTitle.add(i, result.get(i).toString());
+                listTitle.add(i, "\nRecipe: " + result.get(i).getName() + "\nIngredients: " + result.get(i).getIngredientLines() + "\nLink: " + result.get(i).getLink());
             }
 
             // set the results to the list
