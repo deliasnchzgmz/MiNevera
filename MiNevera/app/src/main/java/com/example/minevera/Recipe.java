@@ -8,10 +8,14 @@ package com.example.minevera;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.JsonReader;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -22,6 +26,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,25 +35,29 @@ import javax.net.ssl.HttpsURLConnection;
 
 class EdamamRecipe {
     String label;
-    String ingredientLines;
-    String link;
+    ArrayList<String> ingredientLines;
+    URL link;
 
     public EdamamRecipe() { //String name, String ingredients, String link
         this.label = "";
-        this.ingredientLines = "";
-        this.link = "";
+        this.ingredientLines = new ArrayList<String>();
+        this.link = null;
     }
 
     public void setLabel(String label) {
         this.label = label;
     }
 
-    public void setIngredientLines(String ingredientLines) {
-        this.ingredientLines = ingredientLines;
+    public void setIngredientLines(String ingredient) {
+        ingredientLines.add(ingredient);
     }
 
     public void setLink(String longitude) {
-        this.link = link;
+        try {
+            this.link = new URL(longitude);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getName() {
@@ -56,11 +65,18 @@ class EdamamRecipe {
     }
 
     public String getIngredientLines() {
-        return ingredientLines;
+        String aux;
+        if (ingredientLines.size()==0){
+            aux = TextUtils.join("\"", ingredientLines);
+        } else {
+            aux = TextUtils.join("\",\"", ingredientLines);
+        }
+
+        return aux;
     }
 
     public String getLink() {
-        return link;
+        return link.toString();
     }
 
     @Override
@@ -76,7 +92,6 @@ public class Recipe extends AppCompatActivity {
     public String EDAMAM_ID = "3d504fc1";
 
     public String q = "chicken";
-    public String ingr = "3-8";
 
     private ListView m_listview;
 
@@ -101,8 +116,8 @@ public class Recipe extends AppCompatActivity {
                     + q + "&app_id=" + EDAMAM_ID + "&app_key=" + EDAMAM_KEY + "&ingr=3-8");
 
             // make Call to the url
-            //temp = makeCall("https://api.edamam.com/api/recipes/v2?type=public&q=" + q + "&app_id=" + EDAMAM_ID + "&app_key=" + EDAMAM_KEY + "&ingr=3-8");
-            temp = makeCall("https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=3d504fc1&app_key=ec4ce480d955917aee29290b5a94fcd7&ingr=3-8&field=label");
+            temp = makeCall("https://api.edamam.com/api/recipes/v2?type=public&q=" + q + "&app_id=" + EDAMAM_ID + "&app_key=" + EDAMAM_KEY + "&ingr=3-8");
+            //temp = makeCall("https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=3d504fc1&app_key=ec4ce480d955917aee29290b5a94fcd7&ingr=3-8&field=url");
             return temp;
         }
 
@@ -119,7 +134,7 @@ public class Recipe extends AppCompatActivity {
             for (int i = 0; i < result.size(); i++) {
                 // make a list of the venus that are loaded in the list.
                 // show the name, the category and the city
-                listTitle.add(i, result.get(i).getName());
+                listTitle.add(i, result.get(i).toString());
             }
 
             // set the results to the list
@@ -135,7 +150,6 @@ public class Recipe extends AppCompatActivity {
 
         URL url = null;
         BufferedInputStream is = null;
-        Gson gson = new Gson();
         ArrayList<EdamamRecipe> temp = new ArrayList<EdamamRecipe>();
 
         try {
@@ -173,7 +187,17 @@ public class Recipe extends AppCompatActivity {
                                         if (name.equals("label")){
                                             receta.setLabel(jsonReader.nextString());
                                             System.out.println("Receta: " + receta.getName());
-                                        } else {
+                                        } else if (name.equals("ingredientLines")) {
+                                            //ArrayList<String> ingrlines = new ArrayList<>();
+                                            jsonReader.beginArray();
+                                            while (jsonReader.hasNext()){
+                                                receta.setIngredientLines(jsonReader.nextString());
+                                            }
+                                            jsonReader.endArray();
+                                        } else if (name.equals("url")){
+                                            receta.setLink(jsonReader.nextString());
+                                            System.out.println("Link: " + receta.getLink());
+                                        }else {
                                             jsonReader.skipValue();
                                         }
                                     }
@@ -198,4 +222,34 @@ public class Recipe extends AppCompatActivity {
         return temp;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            System.out.println("APPMOV: About settings...");
+
+            Intent intent = new Intent(this, Settings.class);
+
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_about) {
+            System.out.println("APPMOV: About action...");
+
+            Intent intent = new Intent(this, AboutUs.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
