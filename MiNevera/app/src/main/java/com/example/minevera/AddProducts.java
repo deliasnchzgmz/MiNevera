@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -35,6 +36,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddProducts extends AppCompatActivity {
+
+    private int[] daysOfMonth = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
 
     private EditText productName;
     private EditText productDays;
@@ -96,7 +99,8 @@ public class AddProducts extends AppCompatActivity {
 
     public void saveProduct(View view) {
         String name = productName.getText().toString();
-        String days = productDays.getText().toString();
+        String num_days = productDays.getText().toString();
+        String days = getDate(num_days);
         if (mRowId == null) {
             long id = dbAdapter.createNote(name, days);
             if (id > 0) {
@@ -107,9 +111,49 @@ public class AddProducts extends AppCompatActivity {
         }
         setResult(RESULT_OK);
         dbAdapter.close();
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
         finish();
     }
 
+    public String getDate(String num_days){
+        String exp_date;
+        int input_days = Integer.parseInt(num_days);
+        int[] new_date_int = new int[3];
+        int[] current_date_int = new int[3];
+        int[] int_separate = new int[3];
+        String[] current_separate = (DateFormat.format("dd-MM-yyyy", new java.util.Date()).toString()).split("-");
+
+        for (int i=0; i< current_separate.length; i++){
+            current_date_int[i] = Integer.parseInt(current_separate[i]); //array de ints fecha actual
+        }//int[0]=dia; int[1]=mes; int[2]=año
+        if((current_date_int[0]+input_days)>daysOfMonth[current_date_int[1]]){//compruebo si se pasa de mes
+            if(current_date_int[1]==12){ //compruebo si se pasa de año
+                new_date_int[2] = current_date_int[2]+1;
+            }else{//solo pasa de mes
+                if((current_date_int[1]==2)&&(current_date_int[2]%4==0)&&((current_date_int[2]%100==0)||(current_date_int[2]%400==0))){ //es bisiesto?
+                    new_date_int[0] = (current_date_int[0]+input_days)-(daysOfMonth[current_date_int[1]]+1);
+                    //new_day = current_day+input_days-num_days_current_month
+                    new_date_int[1] = current_date_int[1]+1; //paso de mes
+                }else {
+                    new_date_int[0] = (current_date_int[0] + input_days) - (daysOfMonth[current_date_int[1]]+1);
+                    //new_day = current_day+input_days-num_days_current_month
+                    new_date_int[1] = current_date_int[1] + 1; //paso de mes
+                }
+                new_date_int[2] = current_date_int[2];
+            }
+
+        }else{
+            //si no paso ni de mes ni de año
+            new_date_int[0] = current_date_int[0]+input_days;
+            new_date_int[1] = current_date_int[1];
+            new_date_int[2] =current_date_int[2];
+        }
+        //ahora lo paso a string!!!
+        exp_date = Integer.toString(new_date_int[0])+"-"+Integer.toString(new_date_int[1])+"-"+Integer.toString(new_date_int[2]);
+
+        return exp_date;
+    }
 
 }
 
