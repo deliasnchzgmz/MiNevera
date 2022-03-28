@@ -26,4 +26,12 @@
     <string name="b_bbdd_desc">Añadir productos a la nevera manualmente</string>
     <string name="b_camara_desc">Abrir la cámara </string>
 
+    #search ingredient
+    <string name="title_dialog">Error</string>
+    <string name="message_dialog">Please enter an ingredient</string>
+    <string name="button_ok">Search</string>
+    <string name="toast_name">Ingredient OK</string>
+    <string name="text_message">Search a recipe by ingredient</string>
+    <string name="edit_message">Enter an ingredient</string>
+
 </resources>

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiNevera">
         <activity
+            android:name=".SearchIngr"
+            android:exported="false" />
+        <activity
             android:name=".Recipe"
             android:exported="true" />
         <activity
@@ -35,18 +38,17 @@
         <activity
             android:name=".AddProducts"
             android:exported="true"
-            android:parentActivityName="com.example.minevera.ProductList"></activity>
-
-        <activity android:name=".ProductList"
-            android:exported="true"></activity>
-
-        <activity android:name=".AddMenu"
+            android:parentActivityName=".ProductList" />
+        <activity
+            android:name=".ProductList"
+            android:exported="true" />
+        <activity
+            android:name=".AddMenu"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Translucent"></activity>
-
-        <activity android:name=".Camara"
-            android:exported="true"></activity>
-
+            android:theme="@style/Theme.AppCompat.Translucent" />
+        <activity
+            android:name=".Camara"
+            android:exported="true" />
     </application>
 
 </manifest>
