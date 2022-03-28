@@ -107,6 +107,8 @@ public class AddProducts extends AppCompatActivity {
         }
         setResult(RESULT_OK);
         dbAdapter.close();
+        Intent mainIntent = new Intent (this, MainActivity.class);
+        startActivity(mainIntent);
         finish();
     }
 

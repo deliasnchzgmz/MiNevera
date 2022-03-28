@@ -12,6 +12,8 @@
     <string name="b_mapa_desc">Abrir el mapa </string>
     <string name="mensaje_mainact">En tu nevera actualmente hay ...</string>
 
+    <string name="api_key_edamam">ec4ce480d955917aee29290b5a94fcd7\t</string>
+    <string name="api_id_edamam">3d504fc1</string>
     # add activity
     <string name="no_content">Aún no has añadido nada</string>
     <string name="menu_insert">Añadir producto</string>
@@ -23,5 +25,13 @@
     #add menu
     <string name="b_bbdd_desc">Añadir productos a la nevera manualmente</string>
     <string name="b_camara_desc">Abrir la cámara </string>
+
+    #search ingredient
+    <string name="title_dialog">Error</string>
+    <string name="message_dialog">Please enter an ingredient</string>
+    <string name="button_ok">Search</string>
+    <string name="toast_name">Ingredient OK</string>
+    <string name="text_message">Search a recipe by ingredient</string>
+    <string name="edit_message">Enter an ingredient</string>
 
 </resources>
