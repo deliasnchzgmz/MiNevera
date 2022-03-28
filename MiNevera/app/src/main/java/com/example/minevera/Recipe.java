@@ -9,6 +9,7 @@ package com.example.minevera;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
@@ -89,7 +91,7 @@ public class Recipe extends AppCompatActivity {
     public String EDAMAM_KEY = "ec4ce480d955917aee29290b5a94fcd7";
     public String EDAMAM_ID = "3d504fc1";
 
-    public String q = "chicken";
+    public String q = "";
 
     private ListView m_listview;
 
@@ -101,6 +103,15 @@ public class Recipe extends AppCompatActivity {
         m_listview = (ListView) findViewById(R.id.id_list_view);
 
         new EdamamRecipes().execute();
+        // Obtener referencia al TextView que visualizara el saludo
+        TextView text_hello = (TextView)findViewById(R.id.text_hello_name);
+
+        // Recuperamos la informacion pasada en el intent
+        Bundle bundle = this.getIntent().getExtras();
+
+        // Construimos el saludo a partir del nombre que le pasa la actividad principal
+        q = String.format(bundle.getString("NAME"));
+
     }
 
 
