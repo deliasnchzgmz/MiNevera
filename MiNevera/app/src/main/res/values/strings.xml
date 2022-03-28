@@ -14,6 +14,9 @@
 
     <string name="api_key_edamam">ec4ce480d955917aee29290b5a94fcd7\t</string>
     <string name="api_id_edamam">3d504fc1</string>
+    #add menu
+    <string name="b_bbdd_desc">Añadir productos a la nevera manualmente</string>
+    <string name="b_camara_desc">Abrir la cámara </string>
     # add activity
     <string name="no_content">Aún no has añadido nada</string>
     <string name="menu_insert">Añadir producto</string>
