@@ -24,4 +24,8 @@
     <string name="b_bbdd_desc">Añadir productos a la nevera manualmente</string>
     <string name="b_camara_desc">Abrir la cámara </string>
 
+    #camara menu
+    <string name="fecha_cad_desc">Seleccione la fecha de caducidad del producto </string>
+    <string name="fecha_cad">00-00-0000</string>
+
 </resources>

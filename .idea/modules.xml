@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidStudioProjects.MiNevera.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidStudioProjects.MiNevera.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/MiNevera.iml" filepath="$PROJECT_DIR$/.idea/modules/MiNevera.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/MiNevera.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/MiNevera.app.iml" />
     </modules>

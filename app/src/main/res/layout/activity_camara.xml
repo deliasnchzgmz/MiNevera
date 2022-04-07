@@ -8,13 +8,13 @@ android:layout_height="match_parent"
     android:id="@+id/product_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Name"
+
      />
     <TextView
         android:id="@+id/cod_barras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cbarras"
+
         />
 
     <Button
@@ -22,7 +22,32 @@ android:layout_height="match_parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="Escanear"
-        android:text="Escanear" />
+        android:text="Scan" />
+
+    <TextView
+        android:id="@+id/info_introducefecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fecha_cad_desc"
+        android:visibility="invisible"
+
+        />
+
+    <Button
+        android:id="@+id/introducir_fecha"
+        android:hint="@string/fecha_cad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+         />
+    <TextView
+        android:id="@+id/mostrar_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        />
+
+
 
 
 </LinearLayout>
