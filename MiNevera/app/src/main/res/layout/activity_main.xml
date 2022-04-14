@@ -8,9 +8,11 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:id="@+id/mainact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/mainact">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="93dp">
 
         <TextView
             android:id="@+id/mensaje_mainact"
@@ -26,13 +28,43 @@
             android:id="@+id/id_list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/mensaje_mainact"
+            android:layout_gravity="center_horizontal"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
-            android:layout_below="@+id/mensaje_mainact"
-            android:layout_gravity="center_horizontal"/>
+            android:divider="@android:color/transparent"/>
+
+        <ImageButton
+            android:id="@+id/boton_camara"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="120dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/b_camara_desc"
+            android:onClick="AbrirCamara"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/b_camara"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/boton_bbdd"
+            android:layout_width="70dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="102dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/b_bbdd_desc"
+            android:onClick="AñadirManualmente"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/b_bbdd"
+            android:visibility="gone" />
 
         <RelativeLayout
+            android:id="@+id/id_nav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -40,21 +72,21 @@
 
             <ImageButton
                 android:id="@+id/boton_lista"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginRight="19dp"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="49dp"
                 android:layout_toLeftOf="@id/boton_mas"
                 android:adjustViewBounds="true"
                 android:background="@color/sage_green"
                 android:contentDescription="@string/b_lista_desc"
-                android:onClick="ListaCompra"
+                android:onClick="Recetas"
                 android:scaleType="fitCenter"
                 android:src="@mipmap/b_lista" />
 
             <ImageButton
                 android:id="@+id/boton_mas"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
                 android:layout_centerHorizontal="true"
                 android:adjustViewBounds="true"
                 android:background="@color/sage_green"
@@ -65,11 +97,12 @@
 
             <ImageButton
                 android:id="@+id/boton_mapa"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
                 android:layout_alignRight="@id/boton_mapa"
                 android:layout_alignParentEnd="false"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="49dp"
+                android:layout_marginRight="0dp"
                 android:layout_toRightOf="@id/boton_mas"
                 android:adjustViewBounds="true"
                 android:background="@color/sage_green"
