@@ -30,10 +30,14 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="10dp"
             android:layout_below="@+id/mensaje_mainact"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_above="@+id/rel_lay"
+            android:layout_gravity="center_horizontal"
+            android:divider="@android:color/transparent"
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:id="@+id/rel_lay"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/sage_green">

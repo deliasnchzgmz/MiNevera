@@ -21,6 +21,9 @@
     <string name="name">Nombre</string>
     <string name="save">Guardar</string>
     <string name="edit_product">Editar producto</string>
+    <string name="null_name">You need to introduce the name of the product.</string>
+    <string name="null_days">Please, introduce a valid value.</string>
+    <string name="max_days">The maximum number of days is 25.</string>
 
     #add menu
     <string name="b_bbdd_desc">Añadir productos a la nevera manualmente</string>

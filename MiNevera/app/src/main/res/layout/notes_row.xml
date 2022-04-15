@@ -3,6 +3,7 @@
     android:id="@+id/card_view"
     android:layout_width="380dp"
     android:layout_height="90dp"
+    card_view:cardUseCompatPadding="true"
     android:layout_gravity="center"
     card_view:cardCornerRadius="10dp"
     card_view:cardBackgroundColor="@color/sage_green">
