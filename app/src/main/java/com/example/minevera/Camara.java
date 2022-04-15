@@ -53,8 +53,8 @@ import com.google.zxing.integration.android.IntentResult;
 public class Camara extends AppCompatActivity {
     private Button boton_escaner;
     private TextView cod_barras;
-   // private TextView product_name;
-   // private String barcode= "5449000000996";
+    private TextView product_name;
+    private String barcode= null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +64,7 @@ public class Camara extends AppCompatActivity {
         cod_barras=findViewById(R.id.cod_barras);
 
         // Creamos un textview que va a contener los resultados de la consulta
-        //product_name = (TextView) findViewById(R.id.product_name);
-       // new DownloadBarcodeTask().execute();
+        product_name = (TextView) findViewById(R.id.product_name);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -73,7 +72,9 @@ public class Camara extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null)
             if (result.getContents() != null){
-                cod_barras.setText("El código de barras es:\n" + result.getContents());
+                cod_barras.setText(result.getContents());
+                new DownloadBarcodeTask().execute();
+
             }else{
                 cod_barras.setText("Error al escanear el código de barras");
             }
@@ -83,14 +84,16 @@ public class Camara extends AppCompatActivity {
          new IntentIntegrator(Camara.this).initiateScan();
         }
 
-/*
+
    private class DownloadBarcodeTask extends AsyncTask<String, Void, String> {
 
        @Override
        protected String doInBackground(String... urls) {
 
+           barcode=cod_barras.getText().toString();
            // make Call to the url
            String temp;
+           String url="https://world.openfoodfacts.org/api/v0/product/["+barcode+"].json";
            temp= makeCall("https://world.openfoodfacts.org/api/v0/product/["+barcode+"].json");
            return temp;
        }
@@ -136,9 +139,18 @@ public class Camara extends AppCompatActivity {
                    while (jsonReader.hasNext()) {
                        String name = jsonReader.nextName();
                        // Busca la cadena product_name_es
-                       if (name.equals("product_name_es")) {
-                           // comienza un array de objetos
-                           temp=name;
+                       if (name.equals("product")) {
+                           jsonReader.beginObject();
+                           while (jsonReader.hasNext()) {
+                               name = jsonReader.nextName();
+                               // Busca la cadena product_name_es
+                               if (name.equals("product_name_fr")) {
+                                   temp = jsonReader.nextString();
+                               } else {
+                                   jsonReader.skipValue();
+                               }
+                           }
+                           jsonReader.endObject();
                        } else {
                            jsonReader.skipValue();
                        }
@@ -155,7 +167,6 @@ public class Camara extends AppCompatActivity {
 
 
 
-*/
 
 
 }
