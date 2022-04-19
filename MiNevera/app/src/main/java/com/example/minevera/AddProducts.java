@@ -30,9 +30,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.type.DateTime;
+
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AddProducts extends AppCompatActivity {
@@ -97,27 +103,67 @@ public class AddProducts extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }*/
 
-    public void saveProduct(View view) {
+    public void saveProduct(View view) throws ParseException {
+
         String name = productName.getText().toString();
         String num_days = productDays.getText().toString();
+
+        if(name.equals("")||name.equals(" ")||num_days.equals("")||num_days.equals(" ")){
+            Snackbar.make(findViewById(R.id.add_act), R.string.null_name,
+                    Snackbar.LENGTH_SHORT).show();
+            return;
+        }else if(Integer.parseInt(num_days)<1){
+            Snackbar.make(findViewById(R.id.add_act), R.string.null_days,
+                    Snackbar.LENGTH_SHORT).show();
+            return;
+        }else if(Integer.parseInt(num_days)>25){
+            Snackbar.make(findViewById(R.id.add_act), R.string.max_days,
+                    Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
         String days = getDate(num_days);
         if (mRowId == null) {
-            long id = dbAdapter.createNote(name, days);
-            if (id > 0) {
-                mRowId = id;
+            if(name==null||name.equals(" ")){
+                Snackbar.make(findViewById(R.id.mainact), R.string.null_name,
+                        Snackbar.LENGTH_SHORT).show();
+                return;
+            }else if(Integer.parseInt(num_days)<1){
+                Snackbar.make(findViewById(R.id.mainact), R.string.null_days,
+                        Snackbar.LENGTH_SHORT).show();
+                return;
+            }else if(Integer.parseInt(num_days)>25){
+                Snackbar.make(findViewById(R.id.mainact), R.string.max_days,
+                        Snackbar.LENGTH_SHORT).show();
+                return;
+            }else{
+                long id = dbAdapter.createNote(name, days);
+                if (id > 0) {
+                    mRowId = id;
+            }
+
             }
         } else {
            // dbAdapter.updateNote(mRowId, name);
         }
+
         setResult(RESULT_OK);
         dbAdapter.close();
         Intent mainActivity = new Intent(this, MainActivity.class);
         startActivity(mainActivity);
         finish();
+
     }
 
-    public String getDate(String num_days){
-        String exp_date;
+    public String getDate(String num_days) throws ParseException {
+        Calendar c = Calendar.getInstance();
+        Date cDate = c.getTime();
+        c.add(Calendar.DATE, Integer.parseInt(num_days));
+        String exp_date = DateFormat.format("dd-MM-yyyy", c).toString();
+        Date nDate = new SimpleDateFormat("dd-MM-yyyy").parse(exp_date);
+        int resta = cDate.compareTo(nDate);
+
+        /*
         int input_days = Integer.parseInt(num_days);
         int[] new_date_int = new int[3];
         int[] current_date_int = new int[3];
@@ -127,7 +173,7 @@ public class AddProducts extends AppCompatActivity {
         for (int i=0; i< current_separate.length; i++){
             current_date_int[i] = Integer.parseInt(current_separate[i]); //array de ints fecha actual
         }//int[0]=dia; int[1]=mes; int[2]=año
-        if((current_date_int[0]+input_days)>daysOfMonth[current_date_int[1]]){//compruebo si se pasa de mes
+        if((current_date_int[0]+input_days)>daysOfMonth[current_date_int[1]-1]){//compruebo si se pasa de mes
             if(current_date_int[1]==12){ //compruebo si se pasa de año
                 new_date_int[2] = current_date_int[2]+1;
             }else{//solo pasa de mes
@@ -136,7 +182,7 @@ public class AddProducts extends AppCompatActivity {
                     //new_day = current_day+input_days-num_days_current_month
                     new_date_int[1] = current_date_int[1]+1; //paso de mes
                 }else {
-                    new_date_int[0] = (current_date_int[0] + input_days) - (daysOfMonth[current_date_int[1]]+1);
+                    new_date_int[0] = (current_date_int[0] + input_days) - (daysOfMonth[current_date_int[1]]) + 1;
                     //new_day = current_day+input_days-num_days_current_month
                     new_date_int[1] = current_date_int[1] + 1; //paso de mes
                 }
@@ -151,7 +197,7 @@ public class AddProducts extends AppCompatActivity {
         }
         //ahora lo paso a string!!!
         exp_date = Integer.toString(new_date_int[0])+"-"+Integer.toString(new_date_int[1])+"-"+Integer.toString(new_date_int[2]);
-
+        */
         return exp_date;
     }
 

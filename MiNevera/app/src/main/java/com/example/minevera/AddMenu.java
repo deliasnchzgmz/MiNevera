@@ -21,12 +21,13 @@ public class AddMenu extends AppCompatActivity {
     public void AñadirManualmente(View view) {
         Intent listIntent = new Intent(this, AddProducts.class);
         startActivity(listIntent);
-
+        finish();
     }
 
     //Botón de abrir cámara
     public void AbrirCamara(View view) {
         Intent addIntent = new Intent(this, Camara.class);
         startActivity(addIntent);
+        finish();
     }
 }

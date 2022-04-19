@@ -247,14 +247,3 @@ public class Camara extends AppCompatActivity implements DatePickerDialog.OnDate
 
 
 }
-
-
-
-
-
-
-
-
-
-
-

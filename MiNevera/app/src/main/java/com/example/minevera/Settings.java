@@ -13,7 +13,7 @@ public class Settings extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        TextView text_settings = (TextView)findViewById(R.id.text_map);
+
 
         //settings_listview = (ListView) findViewById()
     }
