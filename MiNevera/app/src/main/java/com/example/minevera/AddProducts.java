@@ -31,7 +31,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.type.DateTime;
+
 
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -40,6 +40,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class AddProducts extends AppCompatActivity {
 
@@ -123,6 +124,7 @@ public class AddProducts extends AppCompatActivity {
         }
 
         String days = getDate(num_days);
+        String diff  = getDifference(days);
         if (mRowId == null) {
             if(name==null||name.equals(" ")){
                 Snackbar.make(findViewById(R.id.mainact), R.string.null_name,
@@ -137,11 +139,10 @@ public class AddProducts extends AppCompatActivity {
                         Snackbar.LENGTH_SHORT).show();
                 return;
             }else{
-                long id = dbAdapter.createNote(name, days);
+                long id = dbAdapter.createNote(name, days, diff);
                 if (id > 0) {
                     mRowId = id;
-            }
-
+                }
             }
         } else {
            // dbAdapter.updateNote(mRowId, name);
@@ -161,7 +162,6 @@ public class AddProducts extends AppCompatActivity {
         c.add(Calendar.DATE, Integer.parseInt(num_days));
         String exp_date = DateFormat.format("dd-MM-yyyy", c).toString();
         Date nDate = new SimpleDateFormat("dd-MM-yyyy").parse(exp_date);
-        int resta = cDate.compareTo(nDate);
 
         /*
         int input_days = Integer.parseInt(num_days);
@@ -199,6 +199,15 @@ public class AddProducts extends AppCompatActivity {
         exp_date = Integer.toString(new_date_int[0])+"-"+Integer.toString(new_date_int[1])+"-"+Integer.toString(new_date_int[2]);
         */
         return exp_date;
+    }
+
+    public String getDifference(String days) throws ParseException{
+        Calendar c = Calendar.getInstance();
+        Date cDate = c.getTime();
+        c.add(Calendar.DATE, Integer.parseInt(days));
+        String exp_date = DateFormat.format("dd-MM-yyyy", c).toString();
+        Date nDate = new SimpleDateFormat("dd-MM-yyyy").parse(exp_date);
+        return "";
     }
 
 }
