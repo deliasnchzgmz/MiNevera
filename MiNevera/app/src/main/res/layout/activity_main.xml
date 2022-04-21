@@ -47,7 +47,8 @@
             android:onClick="AbrirCamara"
             android:scaleType="fitCenter"
             android:src="@mipmap/b_camara"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_above="@+id/id_nav"/>
 
         <ImageButton
             android:id="@+id/boton_bbdd"
@@ -61,12 +62,12 @@
             android:onClick="AñadirManualmente"
             android:scaleType="fitCenter"
             android:src="@mipmap/b_bbdd"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_above="@+id/id_nav"/>
 
         <RelativeLayout
             android:id="@+id/id_nav"
             android:layout_width="match_parent"
-            android:id="@+id/rel_lay"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/sage_green">
