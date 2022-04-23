@@ -27,5 +27,9 @@
     #camara menu
     <string name="fecha_cad_desc">Seleccione la fecha de caducidad del producto </string>
     <string name="fecha_cad">00-00-0000</string>
+    #add products
+    <string name="null_name">You need to introduce the name of the product.</string>
+    <string name="null_days">Please, introduce a valid value.</string>
+    <string name="max_days">The maximum number of days is 25.</string>
 
 </resources>

@@ -158,7 +158,7 @@ public class Camara extends AppCompatActivity implements DatePickerDialog.OnDate
         TextView fecha = (TextView) findViewById(R.id.mostrar_fecha);
         fecha.setText(currentDateString);
         String date= fecha.getText().toString();
-        saveProduct(name,date);
+        //saveProduct(name,date);
     }
 
 
@@ -218,7 +218,7 @@ public class Camara extends AppCompatActivity implements DatePickerDialog.OnDate
 
            return temp;
        }
-
+/*
     public void saveProduct(String name, String days) {
 
         if (mRowId == null) {
@@ -236,6 +236,8 @@ public class Camara extends AppCompatActivity implements DatePickerDialog.OnDate
         startActivity(mainIntent);
         finish();
     }
+
+ */
 
 
 

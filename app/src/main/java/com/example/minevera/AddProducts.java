@@ -34,6 +34,9 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.google.android.material.snackbar.Snackbar;
+import java.util.Calendar;
+import java.text.ParseException;
 
 public class AddProducts extends AppCompatActivity {
 
@@ -97,23 +100,57 @@ public class AddProducts extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }*/
 
-    public void saveProduct(View view) {
+    public void saveProduct(View view) throws ParseException {
+
         String name = productName.getText().toString();
         String num_days = productDays.getText().toString();
+
+        if(name.equals("")||name.equals(" ")||num_days.equals("")||num_days.equals(" ")){
+            Snackbar.make(findViewById(R.id.add_act), R.string.null_name,
+                    Snackbar.LENGTH_SHORT).show();
+            return;
+        }else if(Integer.parseInt(num_days)<1){
+            Snackbar.make(findViewById(R.id.add_act), R.string.null_days,
+                    Snackbar.LENGTH_SHORT).show();
+            return;
+        }else if(Integer.parseInt(num_days)>25){
+            Snackbar.make(findViewById(R.id.add_act), R.string.max_days,
+                    Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
         String days = getDate(num_days);
+        String diff = getDiff(days);
         if (mRowId == null) {
-            long id = dbAdapter.createNote(name, days);
-            if (id > 0) {
-                mRowId = id;
+            if(name==null||name.equals(" ")){
+                Snackbar.make(findViewById(R.id.mainact), R.string.null_name,
+                        Snackbar.LENGTH_SHORT).show();
+                return;
+            }else if(Integer.parseInt(num_days)<1){
+                Snackbar.make(findViewById(R.id.mainact), R.string.null_days,
+                        Snackbar.LENGTH_SHORT).show();
+                return;
+            }else if(Integer.parseInt(num_days)>25){
+                Snackbar.make(findViewById(R.id.mainact), R.string.max_days,
+                        Snackbar.LENGTH_SHORT).show();
+                return;
+            }else{
+                long id = dbAdapter.createNote(name, days, diff);
+                if (id > 0) {
+                    mRowId = id;
+                }
+
             }
         } else {
             // dbAdapter.updateNote(mRowId, name);
         }
+
         setResult(RESULT_OK);
         dbAdapter.close();
         Intent mainActivity = new Intent(this, MainActivity.class);
         startActivity(mainActivity);
         finish();
+
     }
 
     public String getDate(String num_days){
@@ -153,6 +190,14 @@ public class AddProducts extends AppCompatActivity {
         exp_date = Integer.toString(new_date_int[0])+"-"+Integer.toString(new_date_int[1])+"-"+Integer.toString(new_date_int[2]);
 
         return exp_date;
+    }
+    public String getDiff(String exp) throws ParseException {
+        Calendar c = Calendar.getInstance();
+        Date cDate = c.getTime(); // fecha actual
+        Date expDate = new SimpleDateFormat("dd-MM-yyyy").parse(exp);;
+        long diff = expDate.getTime() - cDate.getTime(); // tiempo en milisegundos
+        diff = ((diff/1000)/3600)/24;
+        return Long.toString(diff);
     }
 
 }
