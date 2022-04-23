@@ -13,11 +13,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0f7fbb4-79dc-4ed3-b554-e7dc78fd733d" name="Default Changelist" comment="añadir hecho, falta reflejar en lista">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/AddProducts.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/AddProducts.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/Camara.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/Camara.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/dbProducts.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/dbProducts.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add.xml" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/DatePickerFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/AddProducts.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/AddProducts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/Camara.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/minevera/Camara.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_camara.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_camara.xml" afterDir="false" />
+>>>>>>> parent of a0eb988 (fecha new)
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
