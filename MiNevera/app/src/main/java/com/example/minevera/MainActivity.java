@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         // rellenamos el listview con los títulos de todas las notas en la BD
         fillData();
+        //View v = getViewByPosition(2, p_listview);
+        int i = 0;
 
     }
 
@@ -116,11 +118,25 @@ public class MainActivity extends AppCompatActivity {
 
         // array con los campos que queremos ligar a los campos del array de la línea anterior (en este caso sólo text1)
         int[] to = new int[]{R.id.text1, R.id.text2};
-
+        View view = getLayoutInflater().inflate(R.layout.notes_row, null);
         // Creamos un SimpleCursorAdapter y lo asignamos al listview para mostrarlo
         SimpleCursorAdapter notes =
                 new SimpleCursorAdapter(this, R.layout.notes_row, notesCursor, from, to, 0);
+        p_listview.setBackgroundColor(getColor(R.color.black));
         p_listview.setAdapter(notes);
+    }
+
+    public View getViewByPosition(int pos, ListView listView){
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = listView.getFirstVisiblePosition();
+
+        if(pos<firstListItemPosition||pos>lastListItemPosition){
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos-firstListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
+
     }
 
     @Override

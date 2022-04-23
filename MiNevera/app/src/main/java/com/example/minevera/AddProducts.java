@@ -31,7 +31,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.type.DateTime;
 
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -42,8 +41,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class AddProducts extends AppCompatActivity {
-
-    private int[] daysOfMonth = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
 
     private EditText productName;
     private EditText productDays;
@@ -123,6 +120,7 @@ public class AddProducts extends AppCompatActivity {
         }
 
         String days = getDate(num_days);
+        String diff = getDiff(days);
         if (mRowId == null) {
             if(name==null||name.equals(" ")){
                 Snackbar.make(findViewById(R.id.mainact), R.string.null_name,
@@ -137,7 +135,7 @@ public class AddProducts extends AppCompatActivity {
                         Snackbar.LENGTH_SHORT).show();
                 return;
             }else{
-                long id = dbAdapter.createNote(name, days);
+                long id = dbAdapter.createNote(name, days, diff);
                 if (id > 0) {
                     mRowId = id;
             }
@@ -161,44 +159,16 @@ public class AddProducts extends AppCompatActivity {
         c.add(Calendar.DATE, Integer.parseInt(num_days));
         String exp_date = DateFormat.format("dd-MM-yyyy", c).toString();
         Date nDate = new SimpleDateFormat("dd-MM-yyyy").parse(exp_date);
-        int resta = cDate.compareTo(nDate);
-
-        /*
-        int input_days = Integer.parseInt(num_days);
-        int[] new_date_int = new int[3];
-        int[] current_date_int = new int[3];
-        int[] int_separate = new int[3];
-        String[] current_separate = (DateFormat.format("dd-MM-yyyy", new java.util.Date()).toString()).split("-");
-
-        for (int i=0; i< current_separate.length; i++){
-            current_date_int[i] = Integer.parseInt(current_separate[i]); //array de ints fecha actual
-        }//int[0]=dia; int[1]=mes; int[2]=año
-        if((current_date_int[0]+input_days)>daysOfMonth[current_date_int[1]-1]){//compruebo si se pasa de mes
-            if(current_date_int[1]==12){ //compruebo si se pasa de año
-                new_date_int[2] = current_date_int[2]+1;
-            }else{//solo pasa de mes
-                if((current_date_int[1]==2)&&(current_date_int[2]%4==0)&&((current_date_int[2]%100==0)||(current_date_int[2]%400==0))){ //es bisiesto?
-                    new_date_int[0] = (current_date_int[0]+input_days)-(daysOfMonth[current_date_int[1]]+1);
-                    //new_day = current_day+input_days-num_days_current_month
-                    new_date_int[1] = current_date_int[1]+1; //paso de mes
-                }else {
-                    new_date_int[0] = (current_date_int[0] + input_days) - (daysOfMonth[current_date_int[1]]) + 1;
-                    //new_day = current_day+input_days-num_days_current_month
-                    new_date_int[1] = current_date_int[1] + 1; //paso de mes
-                }
-                new_date_int[2] = current_date_int[2];
-            }
-
-        }else{
-            //si no paso ni de mes ni de año
-            new_date_int[0] = current_date_int[0]+input_days;
-            new_date_int[1] = current_date_int[1];
-            new_date_int[2] =current_date_int[2];
-        }
-        //ahora lo paso a string!!!
-        exp_date = Integer.toString(new_date_int[0])+"-"+Integer.toString(new_date_int[1])+"-"+Integer.toString(new_date_int[2]);
-        */
         return exp_date;
+    }
+
+    public String getDiff(String exp) throws ParseException {
+        Calendar c = Calendar.getInstance();
+        Date cDate = c.getTime(); // fecha actual
+        Date expDate = new SimpleDateFormat("dd-MM-yyyy").parse(exp);;
+        long diff = expDate.getTime() - cDate.getTime(); // tiempo en milisegundos
+        diff = ((diff/1000)/3600)/24;
+        return Long.toString(diff);
     }
 
 }

@@ -42,13 +42,15 @@ public class dbProducts {
     //campos de la tabla de la base de datos
     public static final String KEY_TITLE = "name";
     public static final String KEY_DATE = "days"; //guardado como string ("YYYY-MM-DD HH:MM:SS.SSS")
+    public static final String KEY_DIFF = "diff";
     public static final String KEY_ROWID = "_id";
 
     // Sentencia SQL para crear las tablas de las bases de datos
     private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE + " (" +
             KEY_ROWID +" integer primary key autoincrement, " +
             KEY_TITLE +" text not null, " +
-            KEY_DATE  +" text not null);";
+            KEY_DATE +" text not null, " +
+            KEY_DIFF  +" text not null);";
 
     /*
     private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE + " (" +
@@ -121,10 +123,11 @@ public class dbProducts {
 
      * @return rowId or -1 if failed
      */
-    public long createNote(String name, String days) {
+    public long createNote(String name, String days, String diff) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_TITLE, name);
         initialValues.put(KEY_DATE, days);
+        initialValues.put(KEY_DIFF, diff);
 
         return mDb.insert(DATABASE_TABLE, null, initialValues);
     }
