@@ -24,14 +24,22 @@ package com.example.minevera;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+
 // Clase adaptadora que nos va a facilitar el uso de la BD
 public class dbProducts {
+    private AddProducts addProductsClass;
     private static final String TAG = "APMOV: NotesDbAdapter"; // Usado en los mensajes de Log
 
     //Nombre de la base de datos, tablas (en este caso una) y versión
@@ -51,12 +59,6 @@ public class dbProducts {
             KEY_TITLE +" text not null, " +
             KEY_DATE +" text not null, " +
             KEY_DIFF  +" text not null);";
-
-    /*
-    private static final String DATABASE_CREATE = "create table " + DATABASE_TABLE + " (" +
-            KEY_ROWID +" integer primary key autoincrement, " +
-            KEY_TITLE +" text not null, " +
-            KEY_DATE + " text not null);"; */
 
     private DatabaseHelper mDbHelper;
     private SQLiteDatabase mDb;
@@ -123,7 +125,7 @@ public class dbProducts {
 
      * @return rowId or -1 if failed
      */
-    public long createNote(String name, String days, String diff) {
+    public long createCard(String name, String days, String diff) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_TITLE, name);
         initialValues.put(KEY_DATE, days);
@@ -138,7 +140,7 @@ public class dbProducts {
      * @param rowId id of note to delete
      * @return true if deleted, false otherwise
      */
-    public boolean deleteNote(long rowId) {
+    public boolean deleteProduct(long rowId) {
 
         return mDb.delete(DATABASE_TABLE, KEY_ROWID + "=" + rowId, null) > 0;
     }
@@ -174,6 +176,23 @@ public class dbProducts {
 
     }
 
+    public String updateDifference(int rowId, String name, String date) throws ParseException {
+
+        Calendar c = Calendar.getInstance();
+        Date cDate = c.getTime(); // fecha actual
+        Date expDate = new SimpleDateFormat("dd-MM-yyyy").parse(date);;
+        long diff = expDate.getTime() - cDate.getTime(); // tiempo en milisegundos
+        diff = ((diff/1000)/3600)/24;
+
+        ContentValues args = new ContentValues();
+        args.put(KEY_TITLE, name);
+        args.put(KEY_DATE, date);
+        args.put(KEY_DIFF, diff);
+        mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null);
+
+        return Long.toString(diff);
+    }
+
     /**
      * Update the note using the details provided. The note to be updated is
      * specified using the rowId, and it is altered to use the title and body
@@ -183,11 +202,14 @@ public class dbProducts {
      * @param name value to set note title to
      * @return true if the note was successfully updated, false otherwise
      */
-    /*public boolean updateNote(long rowId, String name) {
+    public boolean updateProduct(long rowId, String name, String date, String diff) {
         ContentValues args = new ContentValues();
         args.put(KEY_TITLE, name);
+        args.put(KEY_DATE, date);
+        args.put(KEY_DIFF, diff);
 
         return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;
-    }*/
+    }
+
 }
 

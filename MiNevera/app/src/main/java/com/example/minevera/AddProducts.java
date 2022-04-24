@@ -32,8 +32,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.material.snackbar.Snackbar;
 
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -59,6 +57,7 @@ public class AddProducts extends AppCompatActivity {
         productName = (EditText) findViewById(R.id.name);
         productDays = (EditText) findViewById(R.id.days);
         Button confirmButton = (Button) findViewById(R.id.save);
+        Button deleteButton = (Button) findViewById(R.id.delete);
 
         //creamos el adaptador de la BD y la abrimos
         dbAdapter = new dbProducts(this);
@@ -74,31 +73,25 @@ public class AddProducts extends AppCompatActivity {
         // Si se le ha pasado un id (no era null) rellena el título y el cuerpo con los campos guardados en la BD
         // en caso contrario se dejan en blanco (editamos una nota nueva)
         if (mRowId != null) {
-            Cursor note = dbAdapter.fetchNote(mRowId);
-            productName.setText(note.getString(
-                    note.getColumnIndexOrThrow(dbProducts.KEY_TITLE)));
+            Cursor product = dbAdapter.fetchNote(mRowId + 1);
+            productName.setText(product.getString(
+                    product.getColumnIndexOrThrow(dbProducts.KEY_TITLE)));
 
         }
-    }
-    /*@Override
-    public boolean onOptionsItemSelected(Button b) {
-        // Gestiona la seleccion de opciones en el menú
-        int id = b.getId();
-        if (id == R.id.action_delete) {
-            if (mRowId != null) {
-                dbAdapter.deleteNote(mRowId);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (mRowId == null) {
+
+                } else if (mRowId != null) {
+                    dbAdapter.deleteProduct(mRowId + 1);
+                }
+
+                Intent mainActivity = new Intent(v.getContext(), MainActivity.class);
+                startActivity(mainActivity);
+                finish();
             }
-            setResult(RESULT_OK);
-            dbAdapter.close();
-            finish();
-        }
-
-        if (id == R.id.action_about) {
-            System.out.println("APPMOV: About action...");
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
+        });
+    }
 
     public void saveProduct(View view) throws ParseException {
 
@@ -135,14 +128,14 @@ public class AddProducts extends AppCompatActivity {
                         Snackbar.LENGTH_SHORT).show();
                 return;
             }else{
-                long id = dbAdapter.createNote(name, days, diff);
+                long id = dbAdapter.createCard(name, days, diff);
                 if (id > 0) {
                     mRowId = id;
             }
 
             }
         } else {
-           // dbAdapter.updateNote(mRowId, name);
+            dbAdapter.updateProduct(mRowId+1, name,days,diff);
         }
 
         setResult(RESULT_OK);
@@ -170,6 +163,7 @@ public class AddProducts extends AppCompatActivity {
         diff = ((diff/1000)/3600)/24;
         return Long.toString(diff);
     }
+
 
 }
 
