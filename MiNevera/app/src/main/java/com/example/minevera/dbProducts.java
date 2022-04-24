@@ -150,7 +150,7 @@ public class dbProducts {
      */
     public Cursor fetchAllNotes() {
 
-        return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_TITLE,KEY_DATE}, null, null, null, null, null);
+        return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_TITLE,KEY_DATE,KEY_DIFF}, null, null, null, null, null);
     }
 
     /**
@@ -165,7 +165,7 @@ public class dbProducts {
         Cursor mCursor =
 
                 mDb.query(true, DATABASE_TABLE, new String[] {KEY_ROWID,
-                                KEY_TITLE,KEY_DATE}, KEY_ROWID + "=" + rowId, null,
+                                KEY_TITLE,KEY_DATE, KEY_DIFF}, KEY_ROWID + "=" + rowId, null,
                         null, null, null, null);
         if (mCursor != null) {
             mCursor.moveToFirst();

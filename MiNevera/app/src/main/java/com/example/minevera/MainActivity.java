@@ -1,20 +1,23 @@
 package com.example.minevera;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.database.Cursor;
-import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         // rellenamos el listview con los títulos de todas las notas en la BD
         fillData();
-        //View v = getViewByPosition(2, p_listview);
-        int i = 0;
-
     }
 
     @Override
@@ -111,33 +111,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fillData() {
+        ArrayList<ProductObject> productList = new ArrayList<ProductObject>();
         Cursor notesCursor = dbAdapter.fetchAllNotes();
+        int count  = notesCursor.getCount(); //número de elementos en la base de datos
+        ArrayList<SimpleCursorAdapter> mArray;
+        for (int i = 1;i<=count;i++){
+            Cursor singleCursor = dbAdapter.fetchNote(i);
+            Cursor aux = singleCursor;
+            aux.moveToFirst();
+            String n = aux.getString(1);
+            String d = aux.getString(2);
+            String diff_days = aux.getString(3);
+            ProductObject product = new ProductObject(Integer.toString(i),n,d,diff_days);
+            productList.add(product);
+            }
+        CardAdapter adapter = new CardAdapter(this,productList);
 
-        // Creamos un array con los campos que queremos mostrar en el listview (sólo el título de la nota)
-        String[] from = new String[]{dbProducts.KEY_TITLE,dbProducts.KEY_DATE};
-
-        // array con los campos que queremos ligar a los campos del array de la línea anterior (en este caso sólo text1)
-        int[] to = new int[]{R.id.text1, R.id.text2};
-        View view = getLayoutInflater().inflate(R.layout.notes_row, null);
-        // Creamos un SimpleCursorAdapter y lo asignamos al listview para mostrarlo
-        SimpleCursorAdapter notes =
-                new SimpleCursorAdapter(this, R.layout.notes_row, notesCursor, from, to, 0);
-        p_listview.setBackgroundColor(getColor(R.color.black));
-        p_listview.setAdapter(notes);
+        p_listview.setAdapter(adapter);
     }
 
-    public View getViewByPosition(int pos, ListView listView){
-        final int firstListItemPosition = listView.getFirstVisiblePosition();
-        final int lastListItemPosition = listView.getFirstVisiblePosition();
-
-        if(pos<firstListItemPosition||pos>lastListItemPosition){
-            return listView.getAdapter().getView(pos, null, listView);
-        } else {
-            final int childIndex = pos-firstListItemPosition;
-            return listView.getChildAt(childIndex);
+    private int setLayout(String difference){
+        int diff = Integer.parseInt(difference);
+        if (diff<=2){
+            return R.layout.cards_row_red;
+        }else if(diff>2&&diff<5){
+            return R.layout.cards_row_amber;
+        }else{
+            return R.layout.cards_row_green;
         }
-
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
