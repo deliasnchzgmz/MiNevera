@@ -19,11 +19,14 @@
         <entry key="..\:/Users/Public/MiNevera/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1775" />
         <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/layout/activity_about_us.xml" value="0.15364583333333334" />
+        <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/layout/activity_add.xml" value="0.20625" />
         <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/layout/activity_add_menu.xml" value="0.20018535681186284" />
         <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/layout/activity_camara.xml" value="0.1" />
         <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/layout/activity_list.xml" value="0.13489583333333333" />
-        <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/layout/cards_row_amber.xml" value="0.35470941883767537" />
         <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/layout/notes_row.xml" value="0.1" />
+        <entry key="..\:/Users/dl2pa/AndroidStudioProjects/MiNevera/MiNevera/app/src/main/res/layout/spinner.xml" value="0.25" />
         <entry key="..\:/Users/paula/AndroidStudioProjects/MiNevera/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.133" />
         <entry key="..\:/Users/paula/AndroidStudioProjects/MiNevera/app/src/main/res/drawable/boton_redondo.xml" value="0.186" />
         <entry key="..\:/Users/paula/AndroidStudioProjects/MiNevera/app/src/main/res/drawable/button1_icon.xml" value="0.133" />
@@ -37,6 +40,9 @@
         <entry key="..\:/Users/paula/MiNevera/MiNevera/app/src/main/res/layout/activity_main.xml" value="0.11574074074074074" />
       </map>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_list.xml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

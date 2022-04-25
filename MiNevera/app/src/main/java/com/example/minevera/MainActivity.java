@@ -7,19 +7,23 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.database.Cursor;
-import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+
 import com.google.android.material.snackbar.Snackbar;
+
+import java.text.ParseException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private dbProducts dbAdapter;
     private ListView p_listview;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +37,25 @@ public class MainActivity extends AppCompatActivity {
         // en el que cuando pulsemos sobre un título lancemos una actividad de editar
         // la nota con el id correspondiente
         p_listview = (ListView) findViewById(R.id.id_list_view);
+        p_listview.setOnItemClickListener(
+                new AdapterView.OnItemClickListener()
+                {
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
+                    {
+                        Intent i = new Intent(view.getContext(),AddProducts.class);
+                        i.putExtra(dbProducts.KEY_ROWID, id);
+                        startActivityForResult(i, 1);
+                    }
+                }
+        );
 
         // rellenamos el listview con los títulos de todas las notas en la BD
-        fillData();
-        //View v = getViewByPosition(2, p_listview);
-        int i = 0;
-
+        try {
+            fillData();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -92,14 +109,13 @@ public class MainActivity extends AppCompatActivity {
     public void AbrirCamara(View view) {
         Intent addIntent = new Intent(this, Camara.class);
         startActivity(addIntent);
-        finish();
     }
 
     //Botón de añadir a la lista de la compra manualmente
     public void AñadirManualmente(View view) {
         Intent listIntent = new Intent(this, AddProducts.class);
         startActivity(listIntent);
-        finish();
+
     }
 
     //Botón de abrir el mapa
@@ -110,39 +126,36 @@ public class MainActivity extends AppCompatActivity {
         startActivity(mapIntent);
     }
 
-    private void fillData() {
+    private void fillData() throws ParseException {
+        ArrayList<ProductObject> productList = new ArrayList<ProductObject>();
         Cursor notesCursor = dbAdapter.fetchAllNotes();
+        int count  = notesCursor.getCount(); //número de elementos en la base de datos
+        ArrayList<SimpleCursorAdapter> mArray;
+            for (int i = 1;i<=count;i++){
+                Cursor singleCursor = dbAdapter.fetchNote(i);
+                Cursor aux = singleCursor;
+                aux.moveToFirst();
+                String n = aux.getString(1);
+                String d = aux.getString(2);
+                dbAdapter.updateDifference(i, n, d);
+                String diff_days = aux.getString(3);
+                ProductObject product = new ProductObject(Integer.toString(i),n,d,diff_days);
+                productList.add(product);
+            }
 
-        // Creamos un array con los campos que queremos mostrar en el listview (sólo el título de la nota)
-        String[] from = new String[]{dbProducts.KEY_TITLE,dbProducts.KEY_DATE};
+        CardAdapter adapter = new CardAdapter(this,productList);
 
-        // array con los campos que queremos ligar a los campos del array de la línea anterior (en este caso sólo text1)
-        int[] to = new int[]{R.id.text1, R.id.text2};
-        View view = getLayoutInflater().inflate(R.layout.notes_row, null);
-        // Creamos un SimpleCursorAdapter y lo asignamos al listview para mostrarlo
-        SimpleCursorAdapter notes =
-                new SimpleCursorAdapter(this, R.layout.notes_row, notesCursor, from, to, 0);
-        p_listview.setBackgroundColor(getColor(R.color.black));
-        p_listview.setAdapter(notes);
-    }
-
-    public View getViewByPosition(int pos, ListView listView){
-        final int firstListItemPosition = listView.getFirstVisiblePosition();
-        final int lastListItemPosition = listView.getFirstVisiblePosition();
-
-        if(pos<firstListItemPosition||pos>lastListItemPosition){
-            return listView.getAdapter().getView(pos, null, listView);
-        } else {
-            final int childIndex = pos-firstListItemPosition;
-            return listView.getChildAt(childIndex);
-        }
-
+        p_listview.setAdapter(adapter);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-        fillData();
+        try {
+            fillData();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
 }
