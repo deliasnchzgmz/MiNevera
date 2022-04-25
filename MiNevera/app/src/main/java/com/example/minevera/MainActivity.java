@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.database.Cursor;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);  //inflar layout
+        
 
         dbAdapter = new dbProducts(this);
         dbAdapter.open();
@@ -61,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
         // rellenamos el listview con los títulos de todas las notas en la BD
         try {
             fillData();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        try {
+            checkData();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -211,12 +219,51 @@ public class MainActivity extends AppCompatActivity {
             String diff_days = aux.getString(3);
             ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
             productList.add(product);
+
             aux.close();
         }
 
 
         int id=Integer.parseInt(productList.get(position).getId());
         return id;
+    }
+
+    //check data to see if we need to send notifications
+    private void checkData() throws ParseException {
+        productList = new ArrayList<ProductObject>();
+        Cursor notesCursor = dbAdapter.fetchAllNotes();
+        //int count  = notesCursor.getCount(); //número de elementos en la base de datos
+        ArrayList<SimpleCursorAdapter> mArray;
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        Cursor aux=notesCursor;
+        if(aux.getCount()!=0) {
+            aux.moveToFirst();
+            while (notesCursor.isLast() != true) {
+                Integer i = aux.getInt(0);
+                String n = aux.getString(1);
+                String d = aux.getString(2);
+                dbAdapter.updateDifference(i, n, d);
+                String diff_days = aux.getString(3);
+                if(Integer. parseInt(diff_days)<=2){
+                    startNotifications(n,diff_days);
+                }
+                ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
+                productList.add(product);
+                aux.moveToNext();
+            }
+            Integer i = aux.getInt(0);
+            String n = aux.getString(1);
+            String d = aux.getString(2);
+            dbAdapter.updateDifference(i, n, d);
+            String diff_days = aux.getString(3);
+            if(Integer. parseInt(diff_days)<=2){
+                startNotifications(n,diff_days);
+            }
+            ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
+            productList.add(product);
+            aux.close();
+        }
+
     }
 
 
@@ -229,5 +276,33 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    //las notificaciones
+
+    public void startNotifications(String name, String diff) {
+        // Creamos el Intent que va a lanzar la activity
+        Intent intent = new Intent(this, NotificationService.class);
+
+        // Creamos la informacion a pasar entre actividades
+        Bundle b = new Bundle();
+        //b.putString("NAME", nameText.getText().toString());
+        b.putString("NAME", name);
+        b.putString("DAYS", diff);
+
+        // Asociamos esta informacion al intent
+        intent.putExtras(b);
+
+        // Iniciamos el servicio
+        startService(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Intent intent = new Intent(this, NotificationService.class);
+        stopService(intent);
+    }
+
+
 
 }

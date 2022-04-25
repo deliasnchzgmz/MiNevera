@@ -1,11 +1,15 @@
 package com.example.minevera;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -36,11 +40,11 @@ public class CardAdapter extends ArrayAdapter<ProductObject> {
         // si pillo la pos del product list funcionaría !!! algo rollo productList(pos) pero bien escrito
         ProductObject p = getItem(position);
         int diff = Integer.parseInt(p.difference);
-        if (diff<=2){
+        if (diff <= 2) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.cards_row_red, parent, false);
-        }else if(diff>2&&diff<5){
+        } else if (diff > 2 && diff < 5) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.cards_row_amber, parent, false);
-        }else{
+        } else {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.cards_row_green, parent, false);
         }
         // Check if an existing view is being reused, otherwise inflate the view
@@ -53,7 +57,10 @@ public class CardAdapter extends ArrayAdapter<ProductObject> {
         // Populate the data into the template view using the data object
         text1.setText(p.name);
         text2.setText(p.date);
+
         // Return the completed view to render on screen
         return convertView;
     }
+
+
 }
