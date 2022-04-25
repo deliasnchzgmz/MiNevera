@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private dbProducts dbAdapter;
     private ListView p_listview;
+    private ArrayList<ProductObject> productList;
 
 
     @Override
@@ -44,7 +45,14 @@ public class MainActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
                     {
                         Intent i = new Intent(view.getContext(),AddProducts.class);
-                        i.putExtra(dbProducts.KEY_ROWID, id);
+                        //int real_id= Integer.parseInt (productList.get(position).getId());
+                        int real_id= 0;
+                        try {
+                            real_id = findRealId(position);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        i.putExtra(dbProducts.KEY_ROWID, real_id);
                         startActivityForResult(i, 1);
                     }
                 }
@@ -127,26 +135,90 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fillData() throws ParseException {
-        ArrayList<ProductObject> productList = new ArrayList<ProductObject>();
+        productList = new ArrayList<ProductObject>();
         Cursor notesCursor = dbAdapter.fetchAllNotes();
-        int count  = notesCursor.getCount(); //número de elementos en la base de datos
+        //int count  = notesCursor.getCount(); //número de elementos en la base de datos
         ArrayList<SimpleCursorAdapter> mArray;
-            for (int i = 1;i<=count;i++){
-                Cursor singleCursor = dbAdapter.fetchNote(i);
-                Cursor aux = singleCursor;
-                aux.moveToFirst();
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        Cursor aux=notesCursor;
+        if(aux.getCount()!=0) {
+            aux.moveToFirst();
+            while (notesCursor.isLast() != true) {
+                Integer i = aux.getInt(0);
                 String n = aux.getString(1);
                 String d = aux.getString(2);
                 dbAdapter.updateDifference(i, n, d);
                 String diff_days = aux.getString(3);
-                ProductObject product = new ProductObject(Integer.toString(i),n,d,diff_days);
+                ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
                 productList.add(product);
+                aux.moveToNext();
             }
+            Integer i = aux.getInt(0);
+            String n = aux.getString(1);
+            String d = aux.getString(2);
+            dbAdapter.updateDifference(i, n, d);
+            String diff_days = aux.getString(3);
+            ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
+            productList.add(product);
+            aux.close();
+        }
+/*
+            for (int i = 1;i<=count;i++){
+                //fetchnote the mira el id, asi que si borro el id=3 se para y no funciona
+                Cursor aux = dbAdapter.fetchNote(i);
+                if(aux.getCount()!=0){
 
+                    aux.moveToFirst();
+                    String a=aux.getString(0);
+                    String n = aux.getString(1);
+                    String d = aux.getString(2);
+                    dbAdapter.updateDifference(i, n, d);
+                    String diff_days = aux.getString(3);
+                    ProductObject product = new ProductObject(Integer.toString(i),n,d,diff_days);
+                    productList.add(product);
+                }
+
+            }
+*/
         CardAdapter adapter = new CardAdapter(this,productList);
+        //int i es el id del producto que va en cada card
 
         p_listview.setAdapter(adapter);
     }
+
+    private int findRealId(int position) throws ParseException {
+        productList = new ArrayList<ProductObject>();
+        Cursor notesCursor = dbAdapter.fetchAllNotes();
+        ArrayList<SimpleCursorAdapter> mArray;
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        Cursor aux = notesCursor;
+        if (aux.getCount() != 0) {
+            aux.moveToFirst();
+            while (notesCursor.isLast() != true) {
+                Integer i = aux.getInt(0);
+                String n = aux.getString(1);
+                String d = aux.getString(2);
+                dbAdapter.updateDifference(i, n, d);
+                String diff_days = aux.getString(3);
+                ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
+                productList.add(product);
+                aux.moveToNext();
+            }
+            Integer i = aux.getInt(0);
+            String n = aux.getString(1);
+            String d = aux.getString(2);
+            dbAdapter.updateDifference(i, n, d);
+            String diff_days = aux.getString(3);
+            ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
+            productList.add(product);
+            aux.close();
+        }
+
+
+        int id=Integer.parseInt(productList.get(position).getId());
+        return id;
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {

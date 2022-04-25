@@ -80,10 +80,12 @@ public class AddProducts extends AppCompatActivity {
         }
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                int count=0;
                 if (mRowId == null) {
 
                 } else if (mRowId != null) {
                     dbAdapter.deleteProduct(mRowId + 1);
+
                 }
 
                 Intent mainActivity = new Intent(v.getContext(), MainActivity.class);
@@ -132,6 +134,7 @@ public class AddProducts extends AppCompatActivity {
                 if (id > 0) {
                     mRowId = id;
             }
+
 
             }
         } else {

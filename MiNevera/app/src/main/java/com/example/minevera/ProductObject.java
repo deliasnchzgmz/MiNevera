@@ -12,4 +12,8 @@ public class ProductObject {
         this.date = date;
         this.difference = difference;
     }
+    public String getId(){
+        return this.id;
+    }
+
 }
