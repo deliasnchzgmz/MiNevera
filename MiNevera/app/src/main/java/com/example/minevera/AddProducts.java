@@ -73,7 +73,7 @@ public class AddProducts extends AppCompatActivity {
         // Si se le ha pasado un id (no era null) rellena el título y el cuerpo con los campos guardados en la BD
         // en caso contrario se dejan en blanco (editamos una nota nueva)
         if (mRowId != null) {
-            Cursor product = dbAdapter.fetchNote(mRowId + 1);
+            Cursor product = dbAdapter.fetchNote(mRowId);
             productName.setText(product.getString(
                     product.getColumnIndexOrThrow(dbProducts.KEY_TITLE)));
 
@@ -84,7 +84,7 @@ public class AddProducts extends AppCompatActivity {
                 if (mRowId == null) {
 
                 } else if (mRowId != null) {
-                    dbAdapter.deleteProduct(mRowId + 1);
+                    dbAdapter.deleteProduct(mRowId );
 
                 }
 
@@ -138,7 +138,7 @@ public class AddProducts extends AppCompatActivity {
 
             }
         } else {
-            dbAdapter.updateProduct(mRowId+1, name,days,diff);
+            dbAdapter.updateProduct(mRowId, name,days,diff);
         }
 
         setResult(RESULT_OK);

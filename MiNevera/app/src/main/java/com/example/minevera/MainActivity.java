@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
                     {
 
                         //int real_id= Integer.parseInt (productList.get(position).getId());
-                        int real_id= 0;
+                        long real_id= 0;
                         try {
                             real_id = findRealId(position);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        view.setId(real_id);
+                       // view.setId(real_id);
                         Intent i = new Intent(view.getContext(),AddProducts.class);
                         i.putExtra(dbProducts.KEY_ROWID, real_id);
                         startActivityForResult(i, 1);
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         p_listview.setAdapter(adapter);
     }
 
-    private int findRealId(int position) throws ParseException {
+    private long findRealId(int position) throws ParseException {
         productList = new ArrayList<ProductObject>();
         Cursor notesCursor = dbAdapter.fetchAllNotes();
         ArrayList<SimpleCursorAdapter> mArray;
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        int id=Integer.parseInt(productList.get(position).getId());
+        long id=Long.parseLong(productList.get(position).getId());
         return id;
     }
 
