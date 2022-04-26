@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> arg0, View view, int position, long id)
                     {
-                        Intent i = new Intent(view.getContext(),AddProducts.class);
+
                         //int real_id= Integer.parseInt (productList.get(position).getId());
                         int real_id= 0;
                         try {
@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
+                        view.setId(real_id);
+                        Intent i = new Intent(view.getContext(),AddProducts.class);
                         i.putExtra(dbProducts.KEY_ROWID, real_id);
                         startActivityForResult(i, 1);
                     }

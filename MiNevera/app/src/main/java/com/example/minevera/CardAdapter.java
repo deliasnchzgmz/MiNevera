@@ -21,8 +21,9 @@ import java.util.ArrayList;
 public class CardAdapter extends ArrayAdapter<ProductObject> {
 
 
-    public CardAdapter(Context context, ArrayList<ProductObject> product) {
-        super(context, 0, product);
+    public CardAdapter(Context context, ArrayList<ProductObject> productList) {
+        super(context, 0,productList);
+
     }
     /*
     public int getItemPosition(long id)
@@ -37,7 +38,6 @@ public class CardAdapter extends ArrayAdapter<ProductObject> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // si pillo la pos del product list funcionaría !!! algo rollo productList(pos) pero bien escrito
         ProductObject p = getItem(position);
         int diff = Integer.parseInt(p.difference);
         if (diff <= 2) {
