@@ -15,5 +15,11 @@ public class ProductObject {
     public String getId(){
         return this.id;
     }
+    public String getDifference(){
+        return this.difference;
+    }
+    public String getName(){
+        return this.name;
+    }
 
 }

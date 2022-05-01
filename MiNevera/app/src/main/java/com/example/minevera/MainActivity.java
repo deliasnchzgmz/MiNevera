@@ -8,12 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.database.Cursor;
 import android.widget.SimpleCursorAdapter;
+import java.util.Collections;
 
 
 import com.google.android.material.snackbar.Snackbar;
@@ -41,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         // en el que cuando pulsemos sobre un título lancemos una actividad de editar
         // la nota con el id correspondiente
         p_listview = (ListView) findViewById(R.id.id_list_view);
+        //Notis
+        try {
+            checkData();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         p_listview.setOnItemClickListener(
                 new AdapterView.OnItemClickListener()
                 {
@@ -69,11 +75,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        try {
-            checkData();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
@@ -199,8 +201,6 @@ public class MainActivity extends AppCompatActivity {
     private long findRealId(int position) throws ParseException {
         productList = new ArrayList<ProductObject>();
         Cursor notesCursor = dbAdapter.fetchAllNotes();
-        ArrayList<SimpleCursorAdapter> mArray;
-        ArrayList<Integer> ids = new ArrayList<Integer>();
         Cursor aux = notesCursor;
         if (aux.getCount() != 0) {
             aux.moveToFirst();
@@ -234,21 +234,19 @@ public class MainActivity extends AppCompatActivity {
     private void checkData() throws ParseException {
         productList = new ArrayList<ProductObject>();
         Cursor notesCursor = dbAdapter.fetchAllNotes();
-        //int count  = notesCursor.getCount(); //número de elementos en la base de datos
-        ArrayList<SimpleCursorAdapter> mArray;
-        ArrayList<Integer> ids = new ArrayList<Integer>();
+        ArrayList<String> differences = new ArrayList<String>();
         Cursor aux=notesCursor;
+        String smallest=null;
+
         if(aux.getCount()!=0) {
             aux.moveToFirst();
-            while (notesCursor.isLast() != true) {
+            while (aux.isLast() != true) {
                 Integer i = aux.getInt(0);
                 String n = aux.getString(1);
                 String d = aux.getString(2);
                 dbAdapter.updateDifference(i, n, d);
                 String diff_days = aux.getString(3);
-                if(Integer. parseInt(diff_days)<=2){
-                    startNotifications(n,diff_days);
-                }
+                differences.add(diff_days);
                 ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
                 productList.add(product);
                 aux.moveToNext();
@@ -258,12 +256,36 @@ public class MainActivity extends AppCompatActivity {
             String d = aux.getString(2);
             dbAdapter.updateDifference(i, n, d);
             String diff_days = aux.getString(3);
-            if(Integer. parseInt(diff_days)<=2){
-                startNotifications(n,diff_days);
-            }
+            differences.add(diff_days);
             ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
             productList.add(product);
+        }
+
+        if(differences.isEmpty()==false){
+            Collections.sort(differences);
+            smallest=differences.get(0);
+            String prod_name=null;
+            aux.moveToFirst();
+            while (aux.isLast() != true) {
+                String diff_days = aux.getString(3);
+                if(diff_days.equals(smallest)){
+                    prod_name= aux.getString(1);
+               }
+                aux.moveToNext();
+            }
+
+            String diff_days = aux.getString(3);
+            if(diff_days.equals(smallest)){
+                prod_name= aux.getString(1);
+            }
             aux.close();
+
+            startNotifications(prod_name,smallest);
+
+
+
+
+
         }
 
     }
