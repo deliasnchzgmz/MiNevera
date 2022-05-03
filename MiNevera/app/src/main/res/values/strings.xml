@@ -42,7 +42,11 @@
     <string name="edit_message">Enter an ingredient</string>
 
     #camara menu
-    <string name="fecha_cad_desc">Seleccione la fecha de caducidad del producto </string>
+    <string name="fecha_cad_desc">Select the expiration date of the product </string>
     <string name="fecha_cad">00-00-0000</string>
+    <string name="boton_scan">SCAN</string>
+    <string name="name_scan"> Click "SCAN" to add a new product</string>
+    <string name="wrong_date"> The expiration date should be after the current date.  Please introduce the product again </string>
+    <string name="null_name_camara"> The product has not been found in the database. Please introduce the product again </string>
 
 </resources>

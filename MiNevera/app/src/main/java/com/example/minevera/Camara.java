@@ -142,26 +142,33 @@ public class Camara extends AppCompatActivity implements DatePickerDialog.OnDate
                 // Aquí se actualiza el interfaz de usuario. Mostramos la página en un TextView
                 product_name.setText(result);
                 name = product_name.getText().toString();
-                datetext.setVisibility(View.VISIBLE);
-                datebutton.setVisibility(View.VISIBLE);
-                //boton para seleccionar fecha
-                datebutton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DialogFragment datePicker = new DatePickerFragment();
-                        datePicker.show(getSupportFragmentManager(), "date picker");
-                    }
-                });
+
+                if(name.equals("")||name.equals(" ")){
+                    Snackbar.make(findViewById(R.id.camara_act), R.string.null_name_camara,Snackbar.LENGTH_SHORT).show();
+                    return;
+                }else {
+                    showDatePicker();
+                }
 
             }
         }
+        public void showDatePicker(){
+            datetext.setVisibility(View.VISIBLE);
+            datebutton.setVisibility(View.VISIBLE);
+
+            //boton para seleccionar fecha
+            datebutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogFragment datePicker = new DatePickerFragment();
+                    datePicker.show(getSupportFragmentManager(), "date picker");
+                }
+            });
+        }
 
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            Calendar c = Calendar.getInstance(); // current date
-            /*c.set(Calendar.YEAR, year);
-            c.set(Calendar.MONTH, month);
-            c.set(Calendar.DAY_OF_MONTH, dayOfMonth);*/
-            String expDate = Integer.toString(dayOfMonth)+"-"+Integer.toString(month)+"-"+Integer.toString(year);
+
+            String expDate = Integer.toString(dayOfMonth)+"-"+Integer.toString(month+1)+"-"+Integer.toString(year);
 
             TextView fecha = (TextView) findViewById(R.id.mostrar_fecha);
             fecha.setText(expDate);
@@ -207,7 +214,7 @@ public class Camara extends AppCompatActivity implements DatePickerDialog.OnDate
                             while (jsonReader.hasNext()) {
                                 name = jsonReader.nextName();
                                 // Busca la cadena product_name_es
-                                if (name.equals("product_name_es")) {
+                                if (name.equals("product_name_es") || name.equals("generic_name_es") ) {
                                     temp = jsonReader.nextString();
                                 } else {
                                     jsonReader.skipValue();
@@ -230,25 +237,21 @@ public class Camara extends AppCompatActivity implements DatePickerDialog.OnDate
 
         public void saveProduct(String name, String days) throws ParseException {
             String diff = getDiff(days);
+            if(Integer.parseInt(diff)<0){
+                showDatePicker();
+                Snackbar.make(findViewById(R.id.camara_act), R.string.wrong_date,Snackbar.LENGTH_SHORT).show();
 
-            if (mRowId == null) {
-                if(name.equals("")||name.equals(" ")){
-                    Snackbar.make(findViewById(R.id.add_act), R.string.null_name,
-                            Snackbar.LENGTH_SHORT).show();
-                    return;
-                }
+            }else{
                 long id = dbAdapter.createCard(name, days, diff);
                 if (id > 0) {
                     mRowId = id;
                 }
-            } else {
-                // dbAdapter.updateNote(mRowId, name);
+                setResult(RESULT_OK);
+                dbAdapter.close();
+                Intent mainIntent = new Intent (this, MainActivity.class);
+                startActivity(mainIntent);
+                finish();
             }
-            setResult(RESULT_OK);
-            dbAdapter.close();
-            Intent mainIntent = new Intent (this, MainActivity.class);
-            startActivity(mainIntent);
-            finish();
         }
     public String getDiff(String exp) throws ParseException {
         Calendar c = Calendar.getInstance();

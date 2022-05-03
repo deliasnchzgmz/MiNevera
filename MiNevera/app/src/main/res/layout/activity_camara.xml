@@ -2,13 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/camara_act">
 
     <TextView
         android:id="@+id/product_name"
-        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/name_scan"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:textSize="20sp"
 
         />
     <TextView
@@ -16,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cbarras"
+        android:visibility="gone"
 
         />
 
@@ -23,31 +30,39 @@
         android:id="@+id/boton_escaner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:onClick="Escanear"
-        android:text="Escanear" />
-    android:text="Scan" />
+        android:text="@string/boton_scan"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/info_introducefecha"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/fecha_cad_desc"
         android:visibility="invisible"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:textSize="20sp"
 
         />
 
     <Button
         android:id="@+id/introducir_fecha"
-        android:hint="@string/fecha_cad"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/fecha_cad"
         android:visibility="invisible"
-        />
+        android:textSize="20sp"/>
+
     <TextView
         android:id="@+id/mostrar_fecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:visibility="gone"
         />
 
 

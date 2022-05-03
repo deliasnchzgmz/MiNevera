@@ -250,6 +250,9 @@ public class MainActivity extends AppCompatActivity {
                 ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
                 productList.add(product);
                 aux.moveToNext();
+                if(Integer.parseInt(diff_days)<0){
+                    dbAdapter.deleteProduct(Long.valueOf(i));
+                }
             }
             Integer i = aux.getInt(0);
             String n = aux.getString(1);
@@ -259,6 +262,9 @@ public class MainActivity extends AppCompatActivity {
             differences.add(diff_days);
             ProductObject product = new ProductObject(Integer.toString(i), n, d, diff_days);
             productList.add(product);
+            if(Integer.parseInt(diff_days)<0){
+                dbAdapter.deleteProduct(Long.valueOf(i));
+            }
         }
 
         if(differences.isEmpty()==false){
@@ -273,7 +279,6 @@ public class MainActivity extends AppCompatActivity {
                }
                 aux.moveToNext();
             }
-
             String diff_days = aux.getString(3);
             if(diff_days.equals(smallest)){
                 prod_name= aux.getString(1);
