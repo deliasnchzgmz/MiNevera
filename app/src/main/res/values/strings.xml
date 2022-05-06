@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">MiNevera</string>
+
+    <string name="text_au">About Us</string>
+    <string name="text_map">MAPA</string>
+
+    <string name="action_settings">Settings</string>
+
+    # main activity
+    <string name="b_lista_desc">Añadir a la lista de la compra</string>
+    <string name="b_mas_desc">Añadir productos a la nevera</string>
+    <string name="b_mapa_desc">Abrir el mapa </string>
+    <string name="mensaje_mainact">What\'s in your fridge?</string>
+    <string-array name="options">
+        <item>Options:</item>
+        <item>Edit</item>
+        <item>Delete</item>
+    </string-array>
+
+    # add activity
+    <string name="no_content">You haven\'t added anything...</string>
+    <string name="menu_insert">Add product</string>
+    <string name="menu_delete">Delete product</string>
+    <string name="name">Name</string>
+    <string name="days">Days</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="null_name">You need to introduce the name of the product</string>
+    <string name="null_days">Please, introduce a valid value</string>
+    <string name="max_days">The maximum number of days is 25</string>
+
+    #add menu
+    <string name="b_bbdd_desc">Add products by hand</string>
+    <string name="b_camara_desc">Scan product</string>
+
+    #search ingredient
+    <string name="title_dialog">Error</string>
+    <string name="message_dialog">Please enter an ingredient</string>
+    <string name="button_ok_search">Search</string>
+    <string name="toast_name">Ingredient OK</string>
+    <string name="message_search">Search a recipe by ingredient</string>
+    <string name="edit_message">Enter an ingredient</string>
+
+    #camara menu
+    <string name="fecha_cad_desc">Introduce the expiration date</string>
+    <string name="fecha_cad">DD-MM-YYYY</string>
+    <string name="null_name_camara">Product name is empty</string>
+    <string name="button_ok_search_locations">Search supermarkets in map</string>
+
+</resources>

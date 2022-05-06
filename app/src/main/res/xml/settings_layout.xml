@@ -1,0 +1,14 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        app:key="switch"
+        android:title="Notifications Switch"
+        android:summaryOff="Notifications on"
+        android:summaryOn="Notifications off"/>
+    <Preference
+        android:onClick="AbrirAboutUs"
+        app:key="info"
+        app:title="Information"
+        app:summary="Information about the app and developers"/>
+</PreferenceScreen>

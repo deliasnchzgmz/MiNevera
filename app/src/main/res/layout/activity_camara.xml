@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/camara_act"
+    >
+
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:layout_margin="15dp"
+        />
+    <TextView
+        android:id="@+id/cod_barras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cbarras"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/product_name"
+
+        />
+
+    <Button
+        android:id="@+id/boton_escaner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="Escanear"
+        android:text="Escanear"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/cod_barras"
+        />
+
+
+    <TextView
+        android:id="@+id/info_introducefecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fecha_cad_desc"
+        android:visibility="invisible"
+        android:layout_below="@+id/boton_escaner"
+        android:layout_margin="15dp"
+        />
+
+    <Button
+        android:id="@+id/introducir_fecha"
+        android:hint="@string/fecha_cad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/info_introducefecha"
+        />
+    <TextView
+        android:id="@+id/mostrar_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        />
+
+
+</RelativeLayout>
