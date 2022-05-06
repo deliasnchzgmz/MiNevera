@@ -1,2 +1,0 @@
-# MiNevera
- Proyecto aplicaciones moviles.
