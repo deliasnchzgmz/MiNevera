@@ -7,8 +7,7 @@
         android:summaryOff="Notifications on"
         android:summaryOn="Notifications off"/>
     <Preference
-        android:onClick="AbrirAboutUs"
         app:key="info"
-        app:title="Information"
-        app:summary="Information about the app and developers"/>
+        app:title="Application version"
+        app:summary="Latest version: 1.0.0"/>
 </PreferenceScreen>

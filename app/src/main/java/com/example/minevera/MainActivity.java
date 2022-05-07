@@ -10,13 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.database.Cursor;
 import android.content.SharedPreferences;
 
-import android.widget.Toast;
 
 
 import java.text.ParseException;
@@ -149,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
         productList = new ArrayList<ProductObject>();
         Cursor notesCursor = dbAdapter.fetchAllNotes();
         int count = 0;
-        //ArrayList<Integer> ids = new ArrayList<Integer>();
         Cursor aux = notesCursor;
         if(aux.getCount()!=0) {
             aux.moveToFirst();
@@ -179,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
         //int i es el id del producto que va en cada card
 
         p_listview.setAdapter(adapter);
+        dbAdapter.close();
     }
 
     private long findRealId(int position) throws ParseException {

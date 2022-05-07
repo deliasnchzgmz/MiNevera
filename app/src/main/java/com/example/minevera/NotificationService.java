@@ -30,7 +30,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
 import androidx.core.app.NotificationCompat;
-import android.widget.Toast;
 
 public class NotificationService extends Service {
     public NotificationService() {
@@ -92,7 +91,6 @@ public class NotificationService extends Service {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
         notificationManager.cancel(0);
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
     }
 }
 
