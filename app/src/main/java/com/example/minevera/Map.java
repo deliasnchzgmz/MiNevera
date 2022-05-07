@@ -83,7 +83,7 @@ public class Map extends AppCompatActivity implements LocationListener{
     // Radio de búsqueda
     final String radius = "1000";
 
-    // Tipo de establecimiento (ver API Google Places)
+    // Tipo de establecimiento
     final String type = "supermarket";
 
     private ListView m_listview;
@@ -106,22 +106,14 @@ public class Map extends AppCompatActivity implements LocationListener{
         } else {
             // no tiene permiso, solicitarlo
             requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSION_ACCESS_FINE_LOCATION);
-            // cuando se nos conceda el permiso se llamará a onRequestPermissionsResult()
         }
 
         //Accedemos al servicio de localización
         LocationManager servicioLoc = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        //Obtenemos la lista de proveedores disponibles (activos)
+        //Obtenemos la lista de proveedores disponibles
         boolean soloActivos = true;
         List<String> proveedores = servicioLoc.getProviders(soloActivos);
-        // Podemos probar a cambiar en el Manifest ACCESS_FINE_LOCATION
-        // por ACCESS_COARSE_LOCATION para ver qué proveedores se pueden
-        // utilizar en cada caso (los mostrados en la pantalla del terminal
-        // cuando ejecutamos la aplicación). También podemos probar a
-        // activar y desactivar los proveedores en el teléfono para ver
-        // que realmente la aplicación funciona como debe (en los ajustes
-        // de Ubicación).
 
         if (proveedores.isEmpty()) { // No hay ninguno activo y no se puede hacer nada
             return;
