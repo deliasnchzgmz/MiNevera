@@ -18,6 +18,8 @@ package com.example.minevera;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Código proporcionado por los profesores de la asignatura
  */
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +29,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.material.snackbar.Snackbar;
@@ -73,7 +74,7 @@ public class AddProducts extends AppCompatActivity {
         // Si se le ha pasado un id (no era null) rellena el título y el cuerpo con los campos guardados en la BD
         // en caso contrario se dejan en blanco (editamos una nota nueva)
         if (mRowId != null) {
-            Cursor product = dbAdapter.fetchNote(mRowId);
+            Cursor product = dbAdapter.fetchProduct(mRowId);
             productName.setText(product.getString(
                     product.getColumnIndexOrThrow(dbProducts.KEY_TITLE)));
 
@@ -100,6 +101,7 @@ public class AddProducts extends AppCompatActivity {
         String name = productName.getText().toString();
         String num_days = productDays.getText().toString();
 
+        //Solo se guardarán productos cuando tengan nombre y el número de días introducidos esté entre 1 y 25
         if(name.equals("")||name.equals(" ")||num_days.equals("")||num_days.equals(" ")){
             Snackbar.make(findViewById(R.id.scrollSnackAdd), R.string.null_name,
                     Snackbar.LENGTH_SHORT).show();
@@ -113,7 +115,6 @@ public class AddProducts extends AppCompatActivity {
                     Snackbar.LENGTH_SHORT).show();
             return;
         }
-
         String days = getDate(num_days);
         String diff = getDiff(days);
         if (mRowId == null) {
@@ -140,7 +141,6 @@ public class AddProducts extends AppCompatActivity {
         } else {
             dbAdapter.updateProduct(mRowId, name,days,diff);
         }
-
         setResult(RESULT_OK);
         dbAdapter.close();
         Intent mainActivity = new Intent(this, MainActivity.class);
@@ -149,7 +149,7 @@ public class AddProducts extends AppCompatActivity {
 
     }
 
-    public String getDate(String num_days) throws ParseException {
+    public String getDate(String num_days) throws ParseException { //Calcula la fecha de caducidad añadiendo los días a la fecha actual
         Calendar c = Calendar.getInstance();
         Date cDate = c.getTime();
         c.add(Calendar.DATE, Integer.parseInt(num_days));
@@ -158,7 +158,7 @@ public class AddProducts extends AppCompatActivity {
         return exp_date;
     }
 
-    public String getDiff(String exp) throws ParseException {
+    public String getDiff(String exp) throws ParseException { //Calcula la diferencia de días entre la fecha de caducidad y la fecha actual
         Calendar c = Calendar.getInstance();
         Date cDate = c.getTime(); // fecha actual
         Date expDate = new SimpleDateFormat("dd-MM-yyyy").parse(exp);

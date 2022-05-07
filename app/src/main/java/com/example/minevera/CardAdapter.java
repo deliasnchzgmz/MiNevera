@@ -1,23 +1,17 @@
 package com.example.minevera;
 
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
+
+//Creación de un adaptador, para elegir qué layout colocar dependiendo de los días que queden hasta la fecha de caducidad del producto
+//Realizado siguiendo las directrices de la página recomendada: Developer Android
 public class CardAdapter extends ArrayAdapter<ProductObject> {
 
 
@@ -31,10 +25,13 @@ public class CardAdapter extends ArrayAdapter<ProductObject> {
         ProductObject p = getItem(position);
         int diff = Integer.parseInt(p.difference);
         if (diff <= 2) {
+            //Card roja si quedan 2 días o menos
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.cards_row_red, parent, false);
         } else if (diff > 2 && diff < 5) {
+            //Card ámbar si quedan entre 5 y 2 días
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.cards_row_amber, parent, false);
         } else {
+            //Card verde si quedan más de 5 días
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.cards_row_green, parent, false);
         }
         // Check if an existing view is being reused, otherwise inflate the view

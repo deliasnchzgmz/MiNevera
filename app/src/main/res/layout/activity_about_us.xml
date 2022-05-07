@@ -5,16 +5,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AboutUs">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_au"
-            tools:layout_editor_absoluteX="39dp"
-            tools:layout_editor_absoluteY="40dp" />
-</RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textInstructions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textInstructions"
+                    tools:layout_editor_absoluteX="39dp"
+                    tools:layout_editor_absoluteY="40dp"
+                    android:textSize="20sp"
+                    android:layout_margin="20dp"/>
+
+                <TextView
+                    android:id="@+id/textInstructions1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textInstructions1"
+                    android:layout_margin="20dp"
+                    tools:layout_editor_absoluteX="39dp"
+                    tools:layout_editor_absoluteY="40dp"
+                    android:justificationMode="inter_word"
+                    android:layout_below="@+id/textInstructions"
+                    />
+
+                <TextView
+                    android:id="@+id/textAboutUs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_au"
+                    tools:layout_editor_absoluteX="39dp"
+                    tools:layout_editor_absoluteY="40dp"
+                    android:textSize="20sp"
+                    android:layout_margin="20dp"
+                    android:layout_below="@+id/textInstructions1"/>
+
+                <TextView
+                    android:id="@+id/textAboutUs1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_au1"
+                    android:layout_margin="20dp"
+                    tools:layout_editor_absoluteX="39dp"
+                    tools:layout_editor_absoluteY="40dp"
+                    android:justificationMode="inter_word"
+                    android:layout_below="@+id/textAboutUs"
+                    />
+
+                <TextView
+                    android:id="@+id/textAboutUs2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_au2"
+                    android:layout_margin="20dp"
+                    tools:layout_editor_absoluteX="39dp"
+                    tools:layout_editor_absoluteY="40dp"
+                    android:justificationMode="inter_word"
+                    android:layout_below="@+id/textAboutUs1"
+                    android:autoLink="web"/>
+
+        </RelativeLayout>
+</ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

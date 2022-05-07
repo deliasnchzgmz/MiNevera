@@ -10,13 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.database.Cursor;
 import android.content.SharedPreferences;
 
-import android.widget.Toast;
 
 
 import java.text.ParseException;
@@ -142,14 +140,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void fillData() throws ParseException {
+    private void fillData() throws ParseException { //Recorre la BBDD y coloca los productos uno por uno, determinando la diferencia de días y el color de cada uno
         Context context = getApplicationContext();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean notificationsOff = prefs.getBoolean("switch", false);
+        boolean notificationsOff = prefs.getBoolean("switch", false); //Se recoge el estado del switch
         productList = new ArrayList<ProductObject>();
-        Cursor notesCursor = dbAdapter.fetchAllNotes();
+        Cursor notesCursor = dbAdapter.fetchAllProducts();
         int count = 0;
-        //ArrayList<Integer> ids = new ArrayList<Integer>();
         Cursor aux = notesCursor;
         if(aux.getCount()!=0) {
             aux.moveToFirst();
