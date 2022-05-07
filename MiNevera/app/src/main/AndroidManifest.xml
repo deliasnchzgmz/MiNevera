@@ -21,6 +21,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiNevera">
         <activity
+            android:name=".MapMarkers"
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDQOAsTn_Y5QIye-wV3AJIlWsVFTr1I2Z4" />
+
+        <activity
             android:name=".SearchIngr"
             android:exported="false" />
         <activity

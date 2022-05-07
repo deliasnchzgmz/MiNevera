@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.database.Cursor;
-import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -83,8 +81,14 @@ public class MainActivity extends AppCompatActivity {
         ImageButton boton_camara =  findViewById(R.id.boton_camara);
         ImageButton boton_bbdd = findViewById(R.id.boton_bbdd);
 
-        boton_camara.setVisibility(View.VISIBLE);
-        boton_bbdd.setVisibility(View.VISIBLE);
+        if(boton_camara.getVisibility() == View.GONE){
+            boton_camara.setVisibility(View.VISIBLE);
+            boton_bbdd.setVisibility(View.VISIBLE);
+        } else {
+            boton_camara.setVisibility(View.GONE);
+            boton_bbdd.setVisibility(View.GONE);
+        }
+
     }
 
     public void AbrirCamara(View view) {
@@ -101,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Botón de abrir el mapa
-    public void AbrirMapa(android.view.View view) {
+    public void AbrirMapa(View view) {
         //Snackbar.make(findViewById(R.id.mainact), R.string.b_mapa_desc,
         //Snackbar.LENGTH_SHORT).show();
         Intent mapIntent = new Intent(this, Map.class);

@@ -23,37 +23,44 @@ Añadir licencia de https://opendatacommons.org/licenses/dbcl/1-0/
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.widget.DatePicker;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.util.JsonReader;
-import android.util.Log;
-import android.view.Menu;
 import android.widget.Button;
 import android.view.View;
 import android.widget.TextView;
 import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
-import javax.net.ssl.HttpsURLConnection;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.zxing.*;
+import javax.net.ssl.HttpsURLConnection;
+
+import androidx.fragment.app.DialogFragment;
+import android.app.DatePickerDialog;
+
+import java.util.Calendar;
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class Camara extends AppCompatActivity {
+public class Camara extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private Button boton_escaner;
     private TextView cod_barras;
     private TextView product_name;
     private String barcode= null;
+
+    private TextView datetext;
+    private Button datebutton;
+
+    private Long mRowId;
+    private dbProducts dbAdapter;
+
+    String name;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,9 +68,16 @@ public class Camara extends AppCompatActivity {
         //Botón escaner
         boton_escaner=findViewById(R.id.boton_escaner);
         cod_barras=findViewById(R.id.cod_barras);
+        // Creamos un textview y el editview que van a contener la fecha
+        datetext= (TextView) findViewById(R.id.info_introducefecha);
+        datebutton = (Button) findViewById(R.id.introducir_fecha);
 
         // Creamos un textview que va a contener los resultados de la consulta
         product_name = (TextView) findViewById(R.id.product_name);
+        //creamos el adaptador de la BD y la abrimos
+        dbAdapter = new dbProducts(this);
+        dbAdapter.open();
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -106,8 +120,36 @@ public class Camara extends AppCompatActivity {
 
             // Aquí se actualiza el interfaz de usuario. Mostramos la página en un TextView
             product_name.setText(result);
+            name = product_name.getText().toString();
+            datetext.setVisibility(View.VISIBLE);
+            datebutton.setVisibility(View.VISIBLE);
+            //boton para seleccionar fecha
+            datebutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogFragment datePicker = new DatePickerFragment();
+                    datePicker.show(getSupportFragmentManager(), "date picker");
+                }
+            });
+
         }
     }
+
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String currentDateString = Integer.toString(dayOfMonth)+"-"+Integer.toString(month)+"-"+Integer.toString(year);
+
+        TextView fecha = (TextView) findViewById(R.id.mostrar_fecha);
+        fecha.setText(currentDateString);
+        String date= fecha.getText().toString();
+        saveProduct(name,date);
+    }
+
+
+
 
     public static String makeCall(String stringURL) {
 
@@ -164,8 +206,21 @@ public class Camara extends AppCompatActivity {
         return temp;
     }
 
+    public void saveProduct(String name, String days) {
 
-
-
-
+        if (mRowId == null) {
+            long id = dbAdapter.createNote(name, days);
+            if (id > 0) {
+                mRowId = id;
+            }
+        } else {
+            // dbAdapter.updateNote(mRowId, name);
+        }
+        setResult(RESULT_OK);
+        dbAdapter.close();
+        finish();
+        Intent mainIntent = new Intent (this, MainActivity.class);
+        startActivity(mainIntent);
+        finish();
+    }
 }

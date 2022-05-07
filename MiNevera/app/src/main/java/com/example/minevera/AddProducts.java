@@ -27,13 +27,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class AddProducts extends AppCompatActivity {
 

@@ -5,13 +5,18 @@
       <map>
         <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_about_us.xml" value="0.25" />
         <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_add_menu.xml" value="0.1" />
-        <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_map.xml" value="0.12604166666666666" />
+        <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_camara.xml" value="0.2359375" />
+        <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_location.xml" value="0.15534420289855072" />
+        <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_map.xml" value="0.1" />
+        <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_map_markers.xml" value="0.24682971014492755" />
         <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_recipe.xml" value="0.1" />
         <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_search_ingr.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/activity_settings.xml" value="0.25" />
+        <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/fragment_map.xml" value="0.1" />
         <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/notes_row.xml" value="0.1" />
         <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/row_layout.xml" value="0.1" />
+        <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/layout/row_places.xml" value="0.234375" />
         <entry key="..\:/Users/Paula Madrid Alonso/OneDrive/Documentos/GitHub/MiNevera/MiNevera/app/src/main/res/menu/menu_main.xml" value="0.25" />
         <entry key="..\:/Users/Public/MiNevera/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1775" />
         <entry key="..\:/Users/Public/MiNevera/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2265" />
