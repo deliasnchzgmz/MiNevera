@@ -325,9 +325,7 @@ public class Map extends AppCompatActivity implements LocationListener{
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        //creamos los intents que van a llevar desde el menu desplegable del app bar hasta esas dos actividades
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             System.out.println("APPMOV: About settings...");
