@@ -35,9 +35,8 @@
 
     #search ingredient
     <string name="title_dialog">Error</string>
-    <string name="message_dialog">Please enter an ingredient</string>
+    <string name="message_dialog_ingr">Please enter an ingredient</string>
     <string name="button_ok_search">Search</string>
-    <string name="toast_name">Ingredient OK</string>
     <string name="message_search">Search a recipe by ingredient</string>
     <string name="edit_message">Enter an ingredient</string>
 

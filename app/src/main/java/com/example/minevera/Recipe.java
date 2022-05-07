@@ -1,6 +1,6 @@
 package com.example.minevera;
 
-/*
+/**
  * Asignatura Aplicaciones Moviles - UC3M
  * Update: 04/03/2022.
  *
@@ -9,26 +9,18 @@ package com.example.minevera;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.JsonReader;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import com.google.gson.Gson;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,6 +28,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+//creamos una clase para crear objetos posteriormente
 class EdamamRecipe {
     String label;
     ArrayList<String> ingredientLines;
@@ -87,11 +80,12 @@ class EdamamRecipe {
 
 public class Recipe extends AppCompatActivity {
 
-    // indicar API KEY para el API de tipo "browser" de Google Places
+    //ID y API KEY proporcionada por la web de Edamame
     public String EDAMAM_KEY = "ec4ce480d955917aee29290b5a94fcd7";
     public String EDAMAM_ID = "3d504fc1";
 
-    public String q = "";
+    //donde vamos a guardar el dato pasado desde SearchIngr a Recipe
+    public String ingredient;
 
     private ListView m_listview;
 
@@ -103,14 +97,11 @@ public class Recipe extends AppCompatActivity {
         m_listview = (ListView) findViewById(R.id.id_list_view);
 
         new EdamamRecipes().execute();
-        // Obtener referencia al TextView que visualizara el saludo
-        TextView text_hello = (TextView)findViewById(R.id.text_hello_name);
 
         // Recuperamos la informacion pasada en el intent
         Bundle bundle = this.getIntent().getExtras();
 
-        // Construimos el saludo a partir del nombre que le pasa la actividad principal
-        q = String.format(bundle.getString("NAME"));
+        ingredient = String.format(bundle.getString("ingredient"));
 
     }
 
@@ -120,19 +111,13 @@ public class Recipe extends AppCompatActivity {
         @Override
         protected ArrayList<EdamamRecipe> doInBackground(View... urls) {
             ArrayList<EdamamRecipe> temp;
-            //print the call in the console
+            //print en consola para comprobar que la string del url se ha creado bien
             System.out.println("https://api.edamam.com/api/recipes/v2?type=public&q="
-                    + q + "&app_id=" + EDAMAM_ID + "&app_key=" + EDAMAM_KEY + "&ingr=3-8");
+                    + ingredient + "&app_id=" + EDAMAM_ID + "&app_key=" + EDAMAM_KEY + "&ingr=3-8");
 
-            // make Call to the url
-            temp = makeCall("https://api.edamam.com/api/recipes/v2?type=public&q=" + q + "&app_id=" + EDAMAM_ID + "&app_key=" + EDAMAM_KEY + "&ingr=3-8");
-            //temp = makeCall("https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=3d504fc1&app_key=ec4ce480d955917aee29290b5a94fcd7&ingr=3-8&field=url");
+            //llamamos al método makeCall() que devuelve un arraylist de objetos EdamameRecipe
+            temp = makeCall("https://api.edamam.com/api/recipes/v2?type=public&q=" + ingredient + "&app_id=" + EDAMAM_ID + "&app_key=" + EDAMAM_KEY + "&ingr=3-8");
             return temp;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // we can start a progress bar here
         }
 
         @Override
@@ -141,13 +126,11 @@ public class Recipe extends AppCompatActivity {
             List<String> listTitle = new ArrayList<String>();
 
             for (int i = 0; i < result.size(); i++) {
-                // make a list of the venus that are loaded in the list.
-                // show the name, the category and the city
+                //hacemos una lista con las recetas
                 listTitle.add(i, "\nRecipe: " + result.get(i).getName() + "\nIngredients: " + result.get(i).getIngredientLines() + "\nLink: " + result.get(i).getLink());
             }
 
-            // set the results to the list
-            // and show them in the xml
+            //adaptamos la lista para poder mostrarlo en card views y meterlo en una list view
             ArrayAdapter<String> myAdapter;
             myAdapter = new ArrayAdapter<String>(Recipe.this, R.layout.row_layout, R.id.listText, listTitle);
             m_listview.setAdapter(myAdapter);
@@ -162,6 +145,7 @@ public class Recipe extends AppCompatActivity {
         ArrayList<EdamamRecipe> temp = new ArrayList<EdamamRecipe>();
 
         try {
+            //se crea una url con el string que se pasa como parámetro
             url = new URL(stringURL);
         } catch (Exception ex) {
             System.out.println("Malformed URL");
@@ -169,6 +153,7 @@ public class Recipe extends AppCompatActivity {
 
         try {
             if (url != null) {
+                //se conecta con el url y se guarda el json en un buffer para poder trabajr con él
                 HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
                 is = new BufferedInputStream(urlConnection.getInputStream());
             }
@@ -178,6 +163,8 @@ public class Recipe extends AppCompatActivity {
 
         if (is != null) {
             try {
+                //vamos recorriendo el fichero json que está guardado en el buffer
+                //y vamos seleccionando los campos que nos interesen
                 JsonReader jsonReader = new JsonReader(new InputStreamReader(is, "UTF-8"));
                 jsonReader.beginObject();
                 while (jsonReader.hasNext()){
@@ -185,6 +172,7 @@ public class Recipe extends AppCompatActivity {
                     if (name.equals("hits")){
                         jsonReader.beginArray();
                         while (jsonReader.hasNext()){
+                            //creamos un objeto EdamameRecipe auxiliar en el que guardaremos los campos que nos interesen
                             EdamamRecipe receta = new EdamamRecipe();
                             jsonReader.beginObject();
                             while (jsonReader.hasNext()){
@@ -194,16 +182,18 @@ public class Recipe extends AppCompatActivity {
                                     while (jsonReader.hasNext()){
                                         name = jsonReader.nextName();
                                         if (name.equals("label")){
+                                            //guardamos el nombre de la receta
                                             receta.setLabel(jsonReader.nextString());
                                             System.out.println("Receta: " + receta.getName());
                                         } else if (name.equals("ingredientLines")) {
-                                            //ArrayList<String> ingrlines = new ArrayList<>();
                                             jsonReader.beginArray();
                                             while (jsonReader.hasNext()){
+                                                //guardamos la lista de los ingredientes
                                                 receta.setIngredientLines(jsonReader.nextString());
                                             }
                                             jsonReader.endArray();
                                         } else if (name.equals("url")){
+                                            //guardamos la url de la página de la que viene la receta
                                             receta.setLink(jsonReader.nextString());
                                             System.out.println("Link: " + receta.getLink());
                                         }else {
@@ -216,6 +206,7 @@ public class Recipe extends AppCompatActivity {
                                 }
                             }
                             jsonReader.endObject();
+                            //se guarda cada receta en el arraylist
                             temp.add(receta);
                         }
                         jsonReader.endArray();
@@ -228,6 +219,7 @@ public class Recipe extends AppCompatActivity {
                 return new ArrayList<EdamamRecipe>();
             }
         }
+        //se devuelve el arraylist con todas las recetas
         return temp;
     }
 
@@ -239,9 +231,7 @@ public class Recipe extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        //creamos los intents que van a llevar desde el menu desplegable del app bar hasta esas dos actividades
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             System.out.println("APPMOV: About settings...");

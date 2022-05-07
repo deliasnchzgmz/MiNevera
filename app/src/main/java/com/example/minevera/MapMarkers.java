@@ -54,7 +54,6 @@ public class MapMarkers extends FragmentActivity implements OnMapReadyCallback {
         // Recuperamos la informacion pasada en el intent
         Bundle bundle = this.getIntent().getExtras();
 
-        // Construimos el saludo a partir del nombre que le pasa la actividad principal
         latitude = bundle.getString("latitude");
         longitude = bundle.getString("longitude");
         supermarkets = bundle.getStringArrayList("supermarkets");
@@ -71,38 +70,26 @@ public class MapMarkers extends FragmentActivity implements OnMapReadyCallback {
 
         UiSettings settings = mMap.getUiSettings();
 
+        //ponemos el boton de zoom a un lado del mapa
         settings.setZoomControlsEnabled(true);
+        //ponemos la brújula
         settings.isCompassEnabled();
+
+        //ponemos el punto azul con la localización actual
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         mMap.setMyLocationEnabled(true);
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
 
         for(int i=0; i<supermarkets.size();i++){
+            //empezamos a sacar solo los datos que necesitamos de cada string de cada supermercado
             lat_market = supermarkets.get(i).substring(supermarkets.get(i).indexOf("Latitude:"), supermarkets.get(i).indexOf("\nLongitude"));
             lon_market = supermarkets.get(i).substring(supermarkets.get(i).indexOf("Longitude:"));
             place_name = supermarkets.get(i).substring(supermarkets.get(i).indexOf("name:"), supermarkets.get(i).indexOf("\nLatitude"));
 
-
+            //continuamos sacando solo los datos que necesitamos
             lat_market = lat_market.substring(lat_market.indexOf(":"));
             lon_market = lon_market.substring(lon_market.indexOf(":"));
             place_name = place_name.substring(place_name.indexOf(":"));
@@ -111,15 +98,19 @@ public class MapMarkers extends FragmentActivity implements OnMapReadyCallback {
             lon_market = lon_market.replace(":", "");
             place_name= place_name.replace(":", "");
 
+            //pasamos la latitud y longitud a Double para poder hacer un objeto LatLng con ellos
             latd = Double.parseDouble(lat_market);
             lond = Double.parseDouble(lon_market);
 
+            //creamos el marcados del supermercado
             LatLng market = new LatLng(latd, lond);
             MarkerOptions markerOpts = new MarkerOptions();
             markerOpts.position(market);
+            //si se hace click en el marcador muestra el nombre del supermercado
             mMap.addMarker(markerOpts).setTitle(place_name);
         }
 
+        //centramos el mapa en nuestra localizacion
         centerMap(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
     }
@@ -134,13 +125,8 @@ public class MapMarkers extends FragmentActivity implements OnMapReadyCallback {
         // en este caso, centrar el mapa en unas coordenadas con el método newLatLng()
         CameraUpdate update = CameraUpdateFactory.newLatLng(position);
 
-        // Alternativamente, se puede hacer lo mismo a la vez que se cambia el nivel de zoom
-        // (comentar si se desea evitar el zoom)
         float zoom = 16;
         update = CameraUpdateFactory.newLatLngZoom(position, zoom);
-
-        // Más información sobre distintos movimientos de cámara aquí:
-        // http://developer.android.com/reference/com/google/android/gms/maps/CameraUpdateFactory.html
 
         // Pasamos el tipo de actualización configurada al método del mapa que mueve la cámara
         mMap.moveCamera(update);
@@ -149,15 +135,12 @@ public class MapMarkers extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        //creamos los intents que van a llevar desde el menu desplegable del app bar hasta esas dos actividades
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             System.out.println("APPMOV: About settings...");

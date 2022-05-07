@@ -1,6 +1,6 @@
 package com.example.minevera;
 
-/*
+/**
  * Asignatura Aplicaciones Moviles - UC3M
  * Update: 04/03/2022.
  *
@@ -35,6 +35,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+//creamos una clase para crear objetos posteriormente
 class GooglePlace {
     private String name;
     private String latitude;
@@ -76,10 +77,9 @@ public class Map extends AppCompatActivity implements LocationListener{
 
     private final int REQUEST_PERMISSION_ACCESS_FINE_LOCATION=1;
 
-    // indicar API KEY para el API de tipo "browser" de Google Places
+    // API KEY proporcionada por google
     final String GOOGLE_KEY = "AIzaSyDQOAsTn_Y5QIye-wV3AJIlWsVFTr1I2Z4";
 
-    // Centrado en la UC3M Leganés
     String latitude;
     String longitude;
 
@@ -126,10 +126,6 @@ public class Map extends AppCompatActivity implements LocationListener{
         // que realmente la aplicación funciona como debe (en los ajustes
         // de Ubicación).
 
-        //Mostramos en la pantalla el nombre de dichos proveedores
-        //(lo dejamos en otro método aparte para que el código sea más claro
-        //actualizarTextoProveedores(proveedores);
-
         if (proveedores.isEmpty()) { // No hay ninguno activo y no se puede hacer nada
             return;
         }
@@ -146,11 +142,6 @@ public class Map extends AppCompatActivity implements LocationListener{
         //Pedimos la última localización conocida por el proveedor
         Location localizacion = servicioLoc.getLastKnownLocation(proveedorElegido);
 
-        //Mostramos la información en la pantalla del terminal
-        //actualizarTextoCoordenadas(localizacion);
-
-        // Además, vamos a pedir actualizaciones de la posición:
-
         //Tiempo mínimo entre escuchas de nueva posición
         int tiempo = 1000; //milisegundos
         //Distancia mínima entre escuchas de nueva posición
@@ -160,6 +151,7 @@ public class Map extends AppCompatActivity implements LocationListener{
         //1000ms o 100m, que serán procesadas por el escuchador (implementado en esta misma clase)
         servicioLoc.requestLocationUpdates(proveedorElegido, tiempo, distancia, (LocationListener) this);
 
+        //guardamos los valores de nuestra posicion para pasarlos a la siguiente activity
         latitude = String.valueOf(localizacion.getLatitude());
         longitude = String.valueOf(localizacion.getLongitude());
 
@@ -168,10 +160,12 @@ public class Map extends AppCompatActivity implements LocationListener{
     }
 
     public void sendLocations(View view) {
-        // Creamos el Intent que va a lanzar la segunda activity (SecondActivity)
+        // Creamos el Intent que va a lanzar la activity MapMarkers
         Intent intent = new Intent(this, MapMarkers.class);
 
         // Creamos la informacion a pasar entre actividades
+        //se van a pasar tanto los valores de nuestra latitud y longitud
+        //como un arraylist con todas las latitudes y longitudes de los supermercados más cercanos
         Bundle b = new Bundle();
         b.putString("latitude", latitude);
         b.putString("longitude", longitude);
@@ -189,20 +183,15 @@ public class Map extends AppCompatActivity implements LocationListener{
         @Override
         protected ArrayList<GooglePlace> doInBackground(View... urls) {
             ArrayList<GooglePlace> temp;
-            //print the call in the console
+            //print en consola para comprobar que la string del url se ha creado bien
             System.out.println("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
                     + latitude + "," + longitude + "&radius=" + radius + "&type=" + type + "&sensor=true&key=" + GOOGLE_KEY);
 
-            // make Call to the url
+            //llamamos al método makeCall() que devuelve un arraylist de objetos GooglePlaces
             temp = makeCall("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
                     + latitude + "," + longitude + "&radius=" + radius + "&type=" + type + "&sensor=true&key=" + GOOGLE_KEY);
 
             return temp;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // we can start a progress bar here
         }
 
         @Override
@@ -211,14 +200,14 @@ public class Map extends AppCompatActivity implements LocationListener{
             List<String> listTitle = new ArrayList<String>();
 
             for (int i = 0; i < result.size(); i++) {
-                // make a list of the venus that are loaded in the list.
-                // show the name, the category and the city
-                listTitle.add(i, "Place name: " +result.get(i).getName() + "\nLatitude: " + result.get(i).getLatitude() + "\nLongitude:" + result.get(i).getLongitude());
+                //hacemos una lista con los supermercados
+                listTitle.add(i, "Place name: " + result.get(i).getName() + "\nLatitude: " + result.get(i).getLatitude() + "\nLongitude:" + result.get(i).getLongitude());
             }
 
+            //lo pasamos a arraylist y lo guardamos para poderselo pasar a la siguiente actividad
             supermarkets = new ArrayList<String>(listTitle);
-            // set the results to the list
-            // and show them in the xml
+
+            //adaptamos la lista para poder mostrarlo en card views y meterlo en una list view
             ArrayAdapter<String> myAdapter;
             myAdapter = new ArrayAdapter<String>(Map.this, R.layout.row_places, R.id.listplaces, listTitle);
             m_listview.setAdapter(myAdapter);
@@ -233,6 +222,7 @@ public class Map extends AppCompatActivity implements LocationListener{
         ArrayList<GooglePlace> temp = new ArrayList<GooglePlace>();
 
         try {
+            //se crea una url con el string que se pasa como parámetro
             url = new URL(stringURL);
         } catch (Exception ex) {
             System.out.println("Malformed URL");
@@ -240,6 +230,7 @@ public class Map extends AppCompatActivity implements LocationListener{
 
         try {
             if (url != null) {
+                //se conecta con el url y se guarda el json en un buffer para poder trabajr con él
                 HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
                 is = new BufferedInputStream(urlConnection.getInputStream());
             }
@@ -249,6 +240,8 @@ public class Map extends AppCompatActivity implements LocationListener{
 
         if (is != null) {
             try {
+                //vamos recorriendo el fichero json que está guardado en el buffer
+                //y vamos seleccionando los campos que nos interesen
                 jsonReader = new JsonReader(new InputStreamReader(is, "UTF-8"));
                 jsonReader.beginObject();
                 while (jsonReader.hasNext()) {
@@ -313,7 +306,8 @@ public class Map extends AppCompatActivity implements LocationListener{
             }
         }
 
-        return temp;}
+        return temp;
+    }
 
 
     @Override
