@@ -1,5 +1,10 @@
 package com.example.minevera;
 
+/**
+ * Asignatura Aplicaciones Moviles - UC3M
+ * Update: 26/02/2022.
+ * Código proporcionado por los profesores de la asignatura
+ */
 
 import android.content.Intent;
 import android.os.Bundle;

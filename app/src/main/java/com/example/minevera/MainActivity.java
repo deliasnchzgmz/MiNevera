@@ -140,12 +140,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void fillData() throws ParseException {
+    private void fillData() throws ParseException { //Recorre la BBDD y coloca los productos uno por uno, determinando la diferencia de días y el color de cada uno
         Context context = getApplicationContext();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean notificationsOff = prefs.getBoolean("switch", false);
+        boolean notificationsOff = prefs.getBoolean("switch", false); //Se recoge el estado del switch
         productList = new ArrayList<ProductObject>();
-        Cursor notesCursor = dbAdapter.fetchAllNotes();
+        Cursor notesCursor = dbAdapter.fetchAllProducts();
         int count = 0;
         Cursor aux = notesCursor;
         if(aux.getCount()!=0) {
@@ -176,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
         //int i es el id del producto que va en cada card
 
         p_listview.setAdapter(adapter);
-        dbAdapter.close();
     }
 
     private long findRealId(int position) throws ParseException {

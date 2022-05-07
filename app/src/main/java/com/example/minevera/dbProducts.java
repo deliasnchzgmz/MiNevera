@@ -20,11 +20,13 @@ package com.example.minevera;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ *
+ * Código recogido de AG y proporcionado por los profesores de la asignatura
  */
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -150,8 +152,8 @@ public class dbProducts {
      *
      * @return Cursor over all notes
      */
-    public Cursor fetchAllNotes() {
-
+    public Cursor fetchAllProducts() {
+        //Al recoger todas las n
         return mDb.query(DATABASE_TABLE, new String[] {KEY_ROWID, KEY_TITLE,KEY_DATE,KEY_DIFF}, null, null, null, null, KEY_DIFF);
     }
 
@@ -162,7 +164,7 @@ public class dbProducts {
      * @return Cursor positioned to matching note, if found
      * @throws SQLException if note could not be found/retrieved
      */
-    public Cursor fetchNote(long rowId) throws SQLException {
+    public Cursor fetchProduct(long rowId) throws SQLException {
 
         Cursor mCursor =
 
