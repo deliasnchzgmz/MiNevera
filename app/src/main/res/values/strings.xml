@@ -1,7 +1,37 @@
 <resources>
     <string name="app_name">MiNevera</string>
 
+
+    # instructions
+    <string name="textInstructions">Instrucciones:</string>
+    <string name="textInstructions1">- Pulsando el botón con el icono de lista, se puede acceder al buscador de recetas. Introduce el nombre de algún alimento y la aplicación te mostrará varias opciones de recetas.\n\n
+    - Pulsando el botón con el icono de más, se pueden añadir alimentos a tu nevera. Si el alimento no tiene código de barras o una fecha de caducidad concreta,  se puede añadir de forma manual introduciendo el nombre del producto y una aproximación de los días que se estima que el producto puede durar en buenas condiciones. Si el alimento tiene código de barras, se puede añadir con la opción de escaneado de código de barras. Se escanea el producto para obtener su nombre y se añade la fecha de caducidad del producto por medio de un calendario interactivo.\n\n
+    - Pulsando el botón con el icono del mapa con un marcador, se accede a la funcionalidad de localización de supermercados. La aplicación solicita acceso a la ubicación de tu dispositivo y se proporcionan opciones de supermercados cercanos. \n
+</string>
+
+
+    # about us
     <string name="text_au">About Us</string>
+    <string name="text_au1">
+        Somos tres alumnas de la asignatura de Aplicaciones Móviles de
+        la Universidad Carlos III. Nuestra intención era crear una aplicación que ayude a
+        los usuarios a realizar un consumo responsable de alimentos e intentar reducir el
+        desperdicio de comida, y creemos que MiNevera es la aplicación perfecta para ello.
+    </string>
+    <string name="text_au2">
+        A continuación, incluimos más información sobre nosotras.\n
+        Grupo 6:\n\n
+        Paula Capel Silveiro, 100383474\n
+        LinkedIn: linkedin.com/in/paula-capel-silveiro \n
+        \n
+        Delia Sánchez Gómez, 100383339\n
+        LinkedIn: linkedin.com/in/deliasgmz \n
+        \n
+        Paula Madrid Alonso, 100406260 \n
+        LinkedIn: linkedin.com/in/paula-madrid-alonso \n
+    </string>
+
+
     <string name="text_map">MAPA</string>
 
     <string name="action_settings">Settings</string>
