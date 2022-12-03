@@ -1,2 +1,2 @@
 # MiNevera
- Proyecto aplicaciones moviles.
+ Proyecto aplicaciones móviles.
